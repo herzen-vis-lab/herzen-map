@@ -1,21 +1,23 @@
 //Body.tsx
-import React from "react";
+import React, {useState, useEffect}  from "react";
 import { YMaps, Map, Placemark } from "@pbe/react-yandex-maps";
 import { apiKey, location } from "../../constants/constants";
 import useUserData from "../../hooks/useUserData"; // хук для redux-toolkit чтение
 
-const language = "ru_RU";
-
 const Body = () => {
+  const [state, setState] = useState("ru_RU");
   const userData = useUserData();
-  if (userData[0]) {
-    console.log(userData[0], typeof userData[0]);
-    const language = userData[0];
-    console.log(language, typeof language);
-  }
 
+  useEffect(() => {
+    if (userData[0] && state !== userData[0]) {
+      setState(userData[0]);
+    }
+  }, [userData, state]); 
+ 
   return (
-    <YMaps query={{ apikey: apiKey, lang: language }}>
+  <>
+    <div>state = {state}</div>
+    <YMaps key={state} query={{ apikey: apiKey, lang: state === "ru_RU" ? "ru_RU" : "en_US"  }}>
       <Map
         defaultState={{
           center: [location.center[1], location.center[0]],
@@ -34,6 +36,7 @@ const Body = () => {
         />
       </Map>
     </YMaps>
+   </>
   );
 };
 export default Body;
