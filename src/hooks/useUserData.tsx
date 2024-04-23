@@ -8,6 +8,10 @@ function useUserData() {
   const userDataPointType = useSelector(
     (state: { userData: { pointType: string } }) => state.userData.pointType,
   );
-  return [userDataLanguage, userDataPointType];
+  const userDataPoints = useSelector(
+    (state: { userData: { points: any } }) => state.userData.points,
+  );
+
+  return [userDataLanguage, userDataPointType, userDataPoints];
 }
 export default useUserData;
