@@ -44,10 +44,12 @@ const Body = () => {
 
  console.log(points);
 
+ const balloonText = language === "ru_RU" ? "Скульптурный монумент русскому педагогу и писателю К. Д. Ушинскому." : "Text on English";   
+
  return (
   <>
-    <div>{language} {pointType}</div>
-    <YMaps key={language} query={{ apikey: apiKey, lang: language === "ru_RU" ? "ru_RU" : "en_US"  }}>
+
+    <YMaps key={language} query={{ apikey: apiKey, lang: language === "ru_RU" ? "ru_RU" : "en_US" }}>
       <Map
         defaultState={{
           center: [location.center[1], location.center[0]],
@@ -55,13 +57,14 @@ const Body = () => {
           controls: ["zoomControl", "fullscreenControl"],
         }}
         modules={["control.ZoomControl", "control.FullscreenControl"]}
+	width="90%"
+        height="500px"
       >
         <Placemark
           modules={["geoObject.addon.balloon"]}
-          defaultGeometry={[55.75, 37.57]}
+          defaultGeometry={[59.934557, 30.319471]}
           properties={{
-            balloonContentBody:
-              "This is balloon loaded by the Yandex.Maps API module system",
+            balloonContentBody: balloonText.toString(),
           }}
         />
       </Map>

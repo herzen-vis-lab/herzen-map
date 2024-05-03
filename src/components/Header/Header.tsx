@@ -23,7 +23,7 @@ const Header = () => {
         >
           <option value="ru_RU">RU</option>
           <option value="en_US">EN</option>
-          <option>中文</option>
+          <option>中文 - пока не работает</option>
         </select>
       </div>
       <div>
@@ -31,8 +31,7 @@ const Header = () => {
           value={userDataPointType}
           onChange={(event) => dispatch(setPointType(event.target.value))}
         >
-          <option value="1">Кафе</option>
-          <option value="2">Достопримечательность</option>
+          <option value="1">Достопримечательность</option>
         </select>
       </div>
     </>
