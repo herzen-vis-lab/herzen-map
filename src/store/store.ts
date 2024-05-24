@@ -1,10 +1,11 @@
-//store.ts
 import { configureStore } from "@reduxjs/toolkit";
-import userSlice from "./slice"; // Подключение вашего reducer
+import userSlice from "./slice";
+import mapSettingsSlice from "./mapSettingsSlice";
 
 const store = configureStore({
   reducer: {
     userData: userSlice,
+    mapSettings: mapSettingsSlice
   },
 });
 

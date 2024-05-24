@@ -1,6 +1,5 @@
 //App.tsx
 import React from "react";
-import "./App.css";
 import { YMaps, Map, Placemark } from "@pbe/react-yandex-maps";
 import { apiKey, location } from "../constants/constants";
 import { Provider } from "react-redux"; // redux-toolkit
