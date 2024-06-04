@@ -29,11 +29,12 @@ import * as api from "../api";
 import useUserData from "../hooks/useUserData"; // хук для redux-toolkit чтение
 import useMapSettings from "../hooks/useMapSettings"; // хук для redux-toolkit чтение
 import type { AppDispatch } from '../store/store'; // подтягиваем тип для useDispatch
-import serverPoints from "../api/MapService/points.json";
+//import serverPoints from "../api/MapService/points.json";
 import { useTranslation } from "react-i18next";
 import { languages } from "../i18n";
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import { debug } from "console";
+ 
 
 const modalStyle = {
     position: 'absolute',
@@ -48,12 +49,33 @@ const modalStyle = {
   };
 
 const FieldContainer = styled(Box)(({ theme }) => ({
+
     display: 'flex',
     width: '100%',
     alignItems: 'center',
   }));
 
-export default function Body() {
+const initialPoints = {
+  "data": [{
+    "id": "1",
+    "longitude": "",
+    "latitude": "",
+    "status": "",
+    "type": "",
+    "photos": [],
+    "videos": [],
+    "web": "",
+    "locales": [
+      {"local": "RU", "name": "", "description": ""},
+      {"local": "EN", "name": "", "description": ""},
+      {"local": "CH", "name": "", "description": ""}
+    ]
+  }],
+  "loading": '',
+  "error": ''
+};
+
+export default function MapWrapper() {
     // const [newCoords, setNewCoords] = useState([
     //     47.06587193746529,
     //     39.435380396518724
@@ -88,7 +110,7 @@ export default function Body() {
   
       // state для повторного рендеринга в блоке return
       const [pointType, setPointType] = useState("");
-      const [points, setPoints] = useState([]);
+      const [points, setPoints] = useState(initialPoints);
   
       // читаем из store
       const userData = useUserData();
@@ -111,24 +133,38 @@ export default function Body() {
       useEffect(() => {
         dispatch(api.points.getPoints());
         }, [dispatch]);
-      
-      console.log(points);
-  
+     
+      console.log('MapWrapper points', points);
       function GetPlacemarks() {
-          return serverPoints.points.map((point) => <Placemark
-          modules={['geoObject.addon.balloon', 'geoObject.addon.hint']}
-              defaultGeometry={[point.longitude, point.latitude]}
-              options={{
-                  //draggable: true,
-                  preset: 'islands#blueLeisureCircleIcon',
-              }}
-              properties={{
-                  hintContent: point.locales[0].name,
-                  balloonContentHeader: point.locales[0].name,
-                  balloonContentBody: point.locales[0].description
-              }}
+  	console.log(lang);
+  	
+	let langPosKey: number;
+  	switch (lang) {
+    		case "English":
+      			langPosKey = 1;
+      		break;
+    		case "中国人":
+      			langPosKey = 2;
+      		break;
+    		default:
+      			langPosKey = 0;
+ 	 }  
+	
+	return points.data.map((point) => 
+			<Placemark modules={['geoObject.addon.balloon', 'geoObject.addon.hint']}
+              			defaultGeometry={[point.longitude, point.latitude]}
+             			options={{
+                  		//draggable: true,
+                  			preset: 'islands#blueLeisureCircleIcon',
+              			}}
+              			properties={{
+                  			hintContent: point.locales[langPosKey].name,
+                  			balloonContentHeader: point.locales[langPosKey].name,
+                  			balloonContentBody: point.locales[langPosKey].description,
+					balloonContentFooter: '<a href = ' + point.web.toString() + '>' + 'Ссылка на источник' + '</a>'
+              			}}
           />)
-      }
+    }
   
     return (
       <>

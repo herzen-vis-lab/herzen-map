@@ -18,7 +18,7 @@ export interface MapPlace {
     yandexMap?: string;
     youtube?: string;
   }
-  
+
   export interface MapCategory {
     icon?: MapIcon;
     id: string;

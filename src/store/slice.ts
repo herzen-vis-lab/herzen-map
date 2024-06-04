@@ -5,9 +5,18 @@ import * as api from "../api";
 
 export type PointItem = {
   id: string;
-  point_id: string;
-  language: string;
-  text: string | null;
+  longitude: string,
+  latitude: string,
+  status: string,
+  type: string,
+  photos: [],
+  videos: [],
+  web: string,
+  locales: [{
+    local: string,
+    name: string, 
+    description: string,
+  }]
 };
 
 export interface State {

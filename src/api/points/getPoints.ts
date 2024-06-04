@@ -1,11 +1,12 @@
 // getPoints.ts
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { clientId } from "../../constants/constants";
 
-const clientId = "client1";
+// const clientId = "1";
 const url =
-  "https://d5ddf1qedin3lactukpq.apigw.yandexcloud.net/api/client/" +
+  "https://d5dj9ecjvrq0o7ovljs1.apigw.yandexcloud.net/api/client/" +
   clientId +
-  "/cases";
+  "/points";
 
 export const getPoints = createAsyncThunk("fetchPointsData", async () => {
   const response = await fetch(url);
