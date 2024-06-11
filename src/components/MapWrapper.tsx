@@ -21,6 +21,7 @@ Checkbox,
 } from '@mui/material';
 import LanguageIcon from '@mui/icons-material/Language';
 import LayersIcon from '@mui/icons-material/Layers';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import React, {useState, useEffect, useRef}  from "react";
 import { YMaps, Map, Placemark, Button, ListBox, ListBoxItem, GeolocationControl, SearchControl, RouteButton, RoutePanel, TypeSelector } from "@pbe/react-yandex-maps";
 import { apiKey, location } from "../constants/constants";
@@ -65,12 +66,9 @@ const initialPoints = {
     "photos": [],
     "videos": [],
     "web": "",
-    "locales": [
-      {"local": "RU", "name": "", "description": ""},
-      {"local": "EN", "name": "", "description": ""},
-      {"local": "CH", "name": "", "description": ""}
-    ]
-  }],
+    "name": {"en" : "", "ru": "", "zh": ""},
+    "description": {"en" : "", "ru": "", "zh": ""},
+    }],
   "loading": '',
   "error": ''
 };
@@ -137,18 +135,9 @@ export default function MapWrapper() {
       console.log('MapWrapper points', points);
       function GetPlacemarks() {
   	console.log(lang);
-  	
-	let langPosKey: number;
-  	switch (lang) {
-    		case "English":
-      			langPosKey = 1;
-      		break;
-    		case "中国人":
-      			langPosKey = 2;
-      		break;
-    		default:
-      			langPosKey = 0;
- 	 }  
+    
+    console.log("ТО ЧТО ЛЕЖИТ В i18n: " + i18n.language)
+
 	
 	return points.data.map((point) => 
 			<Placemark modules={['geoObject.addon.balloon', 'geoObject.addon.hint']}
@@ -158,9 +147,12 @@ export default function MapWrapper() {
                   			preset: 'islands#blueLeisureCircleIcon',
               			}}
               			properties={{
-                  			hintContent: point.locales[langPosKey].name,
-                  			balloonContentHeader: point.locales[langPosKey].name,
-                  			balloonContentBody: point.locales[langPosKey].description,
+                            //@ts-ignore
+                  			hintContent: point.name[i18n.language],
+                            //@ts-ignore
+                  			balloonContentHeader: point.name[i18n.language],
+                            //@ts-ignore
+                  			balloonContentBody: point.description[i18n.language],
 					balloonContentFooter: '<a href = ' + point.web.toString() + '>' + 'Ссылка на источник' + '</a>'
               			}}
           />)
@@ -193,7 +185,7 @@ export default function MapWrapper() {
                                             key={language}
                                             value={language} 
                                             onClick={() => {
-                                                i18n.changeLanguage(language);
+                                                i18n.changeLanguage(languageCode);
                                                 //@ts-ignore
                                                 setLang(GetYMapsLanguage(language))}}>     
                                             {language}
@@ -204,6 +196,9 @@ export default function MapWrapper() {
                 </Box>
                     <IconButton color='inherit' onClick={handleOpen}>
                         <LayersIcon/>
+                    </IconButton>
+                    <IconButton color='inherit'>
+                        <AccountCircleIcon/>
                     </IconButton>
                     {/* <IconButton onClick={locateMe}>
                     <MyLocation />
