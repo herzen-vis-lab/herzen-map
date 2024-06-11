@@ -189,11 +189,13 @@ export default function MapWrapper() {
                                 .map(languageCode => 
                                     {
                                         const language = languages.get(languageCode);
-                                        return <MenuItem 
+                                        return <MenuItem
+                                            key={language}
                                             value={language} 
                                             onClick={() => {
                                                 i18n.changeLanguage(language);
-                                                setLang(GetYMapsLanguage(i18n.language))}}>     
+                                                //@ts-ignore
+                                                setLang(GetYMapsLanguage(language))}}>     
                                             {language}
                                         </MenuItem>
                                     })}
