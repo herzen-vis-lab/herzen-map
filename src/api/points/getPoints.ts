@@ -1,15 +1,12 @@
 // getPoints.ts
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { clientId } from "../../constants/constants";
+import { projectId } from "../../constants/constants";
+const apiUrl = process.env.API_URL; //XX.XX.XX.XX:3000
 
-// const clientId = "1";
-const url =
-  "https://d5dj9ecjvrq0o7ovljs1.apigw.yandexcloud.net/api/client/" +
-  clientId +
-  "/points";
+const pointsUrl = apiUrl + "/api/point/project/" + projectId;
 
 export const getPoints = createAsyncThunk("fetchPointsData", async () => {
-  const response = await fetch(url);
+  const response = await fetch(pointsUrl);
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
