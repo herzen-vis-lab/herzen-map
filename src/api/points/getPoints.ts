@@ -1,9 +1,10 @@
 // getPoints.ts
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { projectId } from "../../constants/constants";
-const apiUrl = process.env.API_URL; //XX.XX.XX.XX:3000
+const apiHost = process.env.API_HOST;
+const apiPort = process.env.API_PORT;
 
-const pointsUrl = apiUrl + "/api/point/project/" + projectId;
+const pointsUrl = apiHost + ":" + apiPort + "/api/point/project/" + projectId;
 
 export const getPoints = createAsyncThunk("fetchPointsData", async () => {
   const response = await fetch(pointsUrl);
