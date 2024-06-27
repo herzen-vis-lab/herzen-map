@@ -50,38 +50,33 @@ const modalStyle = {
   };
 
 const FieldContainer = styled(Box)(({ theme }) => ({
-
     display: 'flex',
     width: '100%',
     alignItems: 'center',
-  }));
+}));
 
 const initialPoints = {
   "data": [{
     "id": "1",
     "longitude": "",
     "latitude": "",
-    "status": "",
-    "type": "",
+    "project_id": "",
+    "status_id": "",
+    "type_id": "",
     "photos": [],
     "videos": [],
     "web": "",
-    "name": {"en" : "", "ru": "", "zh": ""},
-    "description": {"en" : "", "ru": "", "zh": ""},
+    "names": {"en" : "", "ru": "", "zh": ""},
+    "descriptions": {"en" : "", "ru": "", "zh": ""},
+    "createdAt": "",
+    "updatedAt": ""
     }],
   "loading": '',
   "error": ''
 };
 
 export default function MapWrapper() {
-    // const [newCoords, setNewCoords] = useState([
-    //     47.06587193746529,
-    //     39.435380396518724
-    //   ]);
-    // const [address, setAddress] = useState("");
-    // const [value, setValue] = useState("");
-    // const [options, setOptions] = useState([]);
-  
+ 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => {
         setOpen(true);
@@ -92,14 +87,15 @@ export default function MapWrapper() {
 
     const { t, i18n } = useTranslation();
     const [lang, setLang] = React.useState(GetYMapsLanguage(i18n.language));
+
     function GetYMapsLanguage(lang: string) {
         switch (lang)
         {
-            case "Русский":
+            case "ru":
                 return "ru_RU"
-            case "English":
+            case "en":
                 return "en_US"
-            case "中国人":
+            case "zh":
                 return "en_US"
             default: 
                 return "ru_RU"
@@ -133,30 +129,29 @@ export default function MapWrapper() {
         }, [dispatch]);
      
       console.log('MapWrapper points', points);
+      console.log('NODE_ENV', process.env["NODE_ENV"].toString());
+      
       function GetPlacemarks() {
-  	console.log(lang);
-    
-    console.log("ТО ЧТО ЛЕЖИТ В i18n: " + i18n.language)
-
-	
+  	console.log("lang", lang);
+        console.log("i18n.language: ", i18n.language);
+        
 	return points.data.map((point) => 
-			<Placemark modules={['geoObject.addon.balloon', 'geoObject.addon.hint']}
-              			defaultGeometry={[point.longitude, point.latitude]}
-             			options={{
-                  		//draggable: true,
-                  			preset: 'islands#blueLeisureCircleIcon',
-              			}}
-              			properties={{
-                            //@ts-ignore
-                  			hintContent: point.name[i18n.language],
-                            //@ts-ignore
-                  			balloonContentHeader: point.name[i18n.language],
-                            //@ts-ignore
-                  			balloonContentBody: point.description[i18n.language],
-					balloonContentFooter: '<a href = ' + point.web.toString() + '>' + 'Ссылка на источник' + '</a>'
-              			}}
+	  <Placemark 
+            modules={['geoObject.addon.balloon', 'geoObject.addon.hint']}
+            defaultGeometry={[point.longitude, point.latitude]}
+            options={{ //draggable: true, 
+              preset: 'islands#blueLeisureCircleIcon', }}
+            properties={{ 
+              //@ts-ignore
+              hintContent: point.names[i18n.language],
+              //@ts-ignore
+              balloonContentHeader: point.names[i18n.language],
+              //@ts-ignore
+              balloonContentBody: point.descriptions[i18n.language],
+	      balloonContentFooter: '<a href = ' + point.web.toString() + '>' + 'Ссылка на источник' + '</a>'
+            }}
           />)
-    }
+       }
   
     return (
       <>

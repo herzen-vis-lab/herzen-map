@@ -1,10 +1,10 @@
 // getPoints.ts
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { projectId } from "../../constants/constants";
-const apiHost = process.env.API_HOST;
-const apiPort = process.env.API_PORT;
+const apiHost = '95.174.95.90';
+const apiPort = '3001'; 
 
-const pointsUrl = apiHost + ":" + apiPort + "/api/point/project/" + projectId;
+const pointsUrl = 'http://' + apiHost + ':' + apiPort + '/api/point/project/' + projectId;
 
 export const getPoints = createAsyncThunk("fetchPointsData", async () => {
   const response = await fetch(pointsUrl);
@@ -12,5 +12,6 @@ export const getPoints = createAsyncThunk("fetchPointsData", async () => {
     throw new Error('Network response was not ok');
   }
   const data = await response.json();
+  data.pointsUrl = pointsUrl;
   return data.data;
 });
