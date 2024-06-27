@@ -1,5 +1,5 @@
 # abiturients-map
-Карта РГПУ для абитуриентов.
+Карта РГПУ для абитуриентов, для запуска указать переменные окружения API_HOST = XX.XX.XX.XX и API_PORT = XXXX.
 
 Yandex maps на React
 https://git.codeproxy.net/fede4ka1245/ymap3-components - но его совсем мало используют...
