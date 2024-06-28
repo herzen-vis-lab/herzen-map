@@ -15,6 +15,6 @@ RUN npm ci --only=production
 # friends don’t let friends run containers as root!
 USER node
 
-# Make port 3001 accessible outside of the container
-EXPOSE 3001
+# Make port 3000 accessible outside of the container
+EXPOSE 3000
 CMD "npm" "start"
