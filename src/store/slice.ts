@@ -31,7 +31,7 @@ export interface State {
 }
 
 const initialState: State = {
-  language: "ru_RU",
+  language: "ru",
   pointType: "",
   points: {
     data: [],
