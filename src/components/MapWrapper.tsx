@@ -22,9 +22,9 @@ Checkbox,
 import LanguageIcon from '@mui/icons-material/Language';
 import LayersIcon from '@mui/icons-material/Layers';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import React, {useState, useEffect, useRef}  from "react";
+import {useState, useEffect, useRef}  from "react";
 import { YMaps, Map, Placemark, Button, ListBox, ListBoxItem, GeolocationControl, SearchControl, RouteButton, RoutePanel, TypeSelector } from "@pbe/react-yandex-maps";
-import { apiKey, location } from "../constants/constants";
+import { apiKey, location, presetsByTypeId } from "../constants/constants";
 import { useDispatch } from "react-redux";
 import * as api from "../api";
 import useUserData from "../hooks/useUserData"; // хук для redux-toolkit чтение
@@ -35,7 +35,8 @@ import { useTranslation } from "react-i18next";
 import { languages } from "../i18n";
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import { debug } from "console";
- 
+import './MapWrapper.css';
+
 
 const modalStyle = {
     position: 'absolute',
@@ -61,7 +62,7 @@ const initialPoints = {
     "longitude": "",
     "latitude": "",
     "project_id": "",
-    "status_id": "",
+    "status_id": 1,
     "type_id": "",
     "photos": [],
     "videos": [],
@@ -77,7 +78,7 @@ const initialPoints = {
 
 export default function MapWrapper() {
  
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const handleOpen = () => {
         setOpen(true);
     }
@@ -86,7 +87,7 @@ export default function MapWrapper() {
     }
 
     const { t, i18n } = useTranslation();
-    const [lang, setLang] = React.useState(GetYMapsLanguage(i18n.language));
+    const [lang, setLang] = useState(GetYMapsLanguage(i18n.language));
 
     function GetYMapsLanguage(lang: string) {
         switch (lang)
@@ -132,26 +133,48 @@ export default function MapWrapper() {
       console.log('NODE_ENV', process.env["NODE_ENV"].toString());
       
       function GetPlacemarks() {
-  	console.log("lang", lang);
-        console.log("i18n.language: ", i18n.language);
-        
-	return points.data.map((point) => 
-	  <Placemark 
-            modules={['geoObject.addon.balloon', 'geoObject.addon.hint']}
-            defaultGeometry={[point.longitude, point.latitude]}
-            options={{ //draggable: true, 
-              preset: 'islands#blueLeisureCircleIcon', }}
-            properties={{ 
-              //@ts-ignore
-              hintContent: point.names[i18n.language],
-              //@ts-ignore
-              balloonContentHeader: point.names[i18n.language],
-              //@ts-ignore
-              balloonContentBody: point.descriptions[i18n.language],
-	      balloonContentFooter: '<a href = ' + point.web.toString() + '>' + 'Ссылка на источник' + '</a>'
-            }}
-          />)
-       }
+        return points.data
+            .filter((point) => point.status_id === 1)
+            .map((point) => {
+                const { id, longitude, latitude, names, descriptions, web, type_id, photos, videos } = point;
+                const language = i18n.language as keyof typeof names;
+    
+                const numericTypeId = Number(type_id);
+                const preset = presetsByTypeId[numericTypeId] || 'islands#blueLeisureIcon';
+    
+                return (
+                    <Placemark 
+                        modules={['geoObject.addon.balloon', 'geoObject.addon.hint']}
+                        defaultGeometry={[longitude, latitude]}
+                        options={{ preset }} 
+                        properties={{
+                            hintContent: names[language],
+                            balloonContentHeader: names[language],
+                            balloonContentBody: `
+                                <div class="placemark-description">
+                                    ${descriptions[language]}
+                                </div>
+                                <div class="placemark-photo">
+                                    <img src="${photos[0]}" alt="">
+                                </div>
+                                 <div class="placemark-video" >
+                                 <iframe src="https://vk.com/video_ext.php?oid=-46508610&id=456239737&hash=ba25656d0f5c8bb3" 
+                                    width="100%" height="320" allowfullscreen="1" allow="autoplay; encrypted-media; 
+                                    fullscreen; picture-in-picture">
+                                </iframe>
+                                </div>`,
+                            balloonContentFooter: `<a href="${web}">Ссылка на источник</a>`
+                        }}
+                    />
+                );
+            });
+    }
+    
+    
+    
+    
+    
+    
   
     return (
       <>
