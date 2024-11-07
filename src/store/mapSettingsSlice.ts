@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import * as api from "../api";
-import { apiKey, location } from "../constants/constants";
+import { location } from "../constants/constants";
 
 export type MapSettings = {
   zoom: number;

@@ -53,15 +53,15 @@ export const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(api.points.getPoints.pending, (state) => {
+      .addCase(api.points.getAllPoints.pending, (state) => {
         state.points.loading = true;
       })
-      .addCase(api.points.getPoints.fulfilled, (state, action) => {
+      .addCase(api.points.getAllPoints.fulfilled, (state, action) => {
         state.points.data = action.payload;
         state.points.loading = false;
         state.points.error = null;
       })
-      .addCase(api.points.getPoints.rejected, (state, action) => {
+      .addCase(api.points.getAllPoints.rejected, (state, action) => {
         state.points.loading = false;
         state.points.error = action.error;
       });
