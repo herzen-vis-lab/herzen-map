@@ -1,3 +1,8 @@
+.wrapper {
+    overflow: hidden;
+    height: 100vh;
+}
+
 .placemark-description {
     background-color: #f0f8ff;
     padding: 10px; 

@@ -1,19 +1,28 @@
-import { CssBaseline, ThemeProvider } from "@mui/material";
-import reportWebVitals from "./reportWebVitals";
-import ReactDOM from "react-dom/client";
-import theme from "./theme";
-import App from "./App";
-import "./i18n.ts";
-import "./index.css";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { CssBaseline, ThemeProvider, useMediaQuery } from '@mui/material';
+import reportWebVitals from './reportWebVitals';
+import App from './App';
+import getTheme from './theme';
+import './i18n.ts';
+import './index.css';
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
+function Root() {
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  
+  const theme = React.useMemo(() => getTheme(prefersDarkMode ? 'dark' : 'light'), [prefersDarkMode]);
+
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <App />
+    </ThemeProvider>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
-  <ThemeProvider theme={theme}>
-    <CssBaseline />
-    <App />
-  </ThemeProvider>
+  <Root />
 );
 
 // If you want to start measuring performance in your app, pass a function

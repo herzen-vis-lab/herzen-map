@@ -10,7 +10,6 @@ html {
   -moz-text-size-adjust: none;
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
-  overflow: hidden;
 }
 
 /* Remove default margin in favour of better control in authored CSS */
@@ -71,12 +70,4 @@ textarea:not([rows]) {
 /* Anything that has been anchored to should have extra scroll margin */
 :target {
   scroll-margin-block: 5ex;
-}
-
-#root {
-  padding: 0px;
-  min-width: 100vw;  
-  width: 100vw;
-  min-height: 100vh;
-  height: 100vh;
 }

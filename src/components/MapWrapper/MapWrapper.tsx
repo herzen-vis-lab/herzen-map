@@ -10,7 +10,7 @@ import {
   styled,
   FormGroup,
   FormControlLabel,
-  Checkbox,
+  Checkbox
 } from "@mui/material";
 import LanguageIcon from "@mui/icons-material/Language";
 import LayersIcon from "@mui/icons-material/Layers";
@@ -28,7 +28,7 @@ import { apiKey, location, presetsByTypeId } from "../../constants/constants";
 import { useDispatch } from "react-redux";
 import * as api from "../../api";
 import useUserData from "../../hooks/useUserData"; // хук для redux-toolkit чтение
-import type { AppDispatch } from "../../store/store"; // подтягиваем тип для useDispatch
+import { AppDispatch } from "../../store/store"; // подтягиваем тип для useDispatch
 import { useTranslation } from "react-i18next";
 import { languages } from "../../i18n";
 import "./MapWrapper.css";
@@ -45,10 +45,10 @@ const modalStyle = {
   p: 4,
 };
 
-const FieldContainer = styled(Box)(({ theme }) => ({
+const FieldContainer = styled(Box)(() => ({
   display: "flex",
   width: "100%",
-  alignItems: "center",
+  alignItems: "center"
 }));
 
 const initialPoints = {
@@ -131,15 +131,13 @@ export default function MapWrapper() {
       .filter((point) => point.status_id === 1)
       .map((point) => {
         const {
-          id,
           longitude,
           latitude,
           names,
           descriptions,
           web,
           type_id,
-          photos,
-          videos,
+          photos
         } = point;
         const language = i18n.language as keyof typeof names;
 
@@ -177,7 +175,7 @@ export default function MapWrapper() {
 
   return (
     <>
-      <Box height="var(--app-height)" display="flex" flexDirection="column">
+      <div className="wrapper">
         <AppBar position="static">
           <Toolbar variant="dense">
             <Box sx={{ flexGrow: 1, display: "flex" }}>
@@ -251,7 +249,7 @@ export default function MapWrapper() {
             <SearchControl options={{ float: "left" }} />
           </Map>
         </YMaps>
-      </Box>
+      </div>
 
       <Modal
         open={open}
