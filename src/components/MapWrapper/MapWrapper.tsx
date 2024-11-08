@@ -61,7 +61,6 @@ const initialPoints = {
       status_id: 1,
       type_id: "",
       photos: [],
-      videos: [],
       web: "",
       names: { en: "", ru: "", zh: "" },
       descriptions: { en: "", ru: "", zh: "" },
@@ -159,12 +158,6 @@ export default function MapWrapper() {
                                 </div>
                                 <div class="placemark-photo">
                                     <img src="${photos[0]}" alt="">
-                                </div>
-                                 <div class="placemark-video" >
-                                 <iframe src="https://vk.com/video_ext.php?oid=-46508610&id=456239737&hash=ba25656d0f5c8bb3" 
-                                    width="100%" height="320" allowfullscreen="1" allow="autoplay; encrypted-media; 
-                                    fullscreen; picture-in-picture">
-                                </iframe>
                                 </div>`,
               balloonContentFooter: `<a href="${web}">Ссылка на источник</a>`,
             }}
