@@ -9,12 +9,14 @@ import { useState } from 'react';
 import { TableHeader } from './TableHeader';
 import { TableData } from './TableData';
 import { columns } from './ColumnsConfig';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
   points: any[];
 };
 
 const AdminTable = ({ points }: Props) => {
+  const navigate = useNavigate();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(15);
 
@@ -25,6 +27,10 @@ const AdminTable = ({ points }: Props) => {
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
+  };
+
+  const openData = (pointId: string) => {
+    navigate(`/admin/details/${pointId}`);
   };
 
   return (
@@ -40,7 +46,7 @@ const AdminTable = ({ points }: Props) => {
           </TableHead>
           <TableBody>
             {points.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((point) => (
-              <TableRow key={point.id} hover={true} sx={{ cursor: 'pointer' }}>
+              <TableRow key={point.id} hover={true} sx={{ cursor: 'pointer' }} onClick={() => openData(point.id)}>
                 {columns.map((col) => (
                   <TableData
                     key={col.label}

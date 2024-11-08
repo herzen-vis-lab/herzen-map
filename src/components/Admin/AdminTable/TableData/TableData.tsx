@@ -13,7 +13,7 @@ const cellStyles = {
   borderRight: '1px solid #ddd',
 };
 
-const TableDataCell: React.FC<TableDataCellProps> = ({ value, render, maxWidth }) => (
+const TableDataCell = ({ value, render, maxWidth }: TableDataCellProps) => (
   <TableCell align="center" sx={{ ...cellStyles, maxWidth }}>
     {render ? render(value) : value}
   </TableCell>
