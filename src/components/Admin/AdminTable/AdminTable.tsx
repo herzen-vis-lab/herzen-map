@@ -30,7 +30,7 @@ const AdminTable = ({ points }: Props) => {
   };
 
   const openData = (pointId: string) => {
-    navigate(`/admin/details/${pointId}`);
+    navigate(`/admin/edit/${pointId}`);
   };
 
   return (

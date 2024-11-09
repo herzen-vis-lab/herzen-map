@@ -43,7 +43,7 @@ export const getTypeLabel = (type_id: number): string => {
       case 22:
         return 'Подготовительные курсы';
       default:
-        return 'Неизвестный тип';
+        return 'Неизвестный';
     }
   };
   

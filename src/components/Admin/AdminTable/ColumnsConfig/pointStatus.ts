@@ -1,13 +1,13 @@
 export const getStatusLabel = (status_id: number): string => {
     switch (status_id) {
       case 0:
-        return 'черновик';
+        return 'Черновик';
       case 1:
-        return 'активная';
+        return 'Активная';
       case 2:
-        return 'архив';
+        return 'Архив';
       default:
-        return 'неизвестно';
+        return 'Неизвестно';
     }
   };
   
