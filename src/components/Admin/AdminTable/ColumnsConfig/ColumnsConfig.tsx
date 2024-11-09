@@ -1,5 +1,4 @@
-import { getStatusLabel } from './pointStatus';
-import { getTypeLabel } from './pointType';
+import { getStatusLabel, getTypeLabel } from 'utils';
 
 export const columns = [
   { label: 'Названия', accessor: 'names.ru', maxWidth: 150 },

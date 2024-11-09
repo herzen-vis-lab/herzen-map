@@ -2,10 +2,10 @@ import {
   MapWrapper,
   Admin,
   PointDetails,
-  CreatePoint
+  CreatePoint,
+  NotFound
 } from "components";
 import { Routes, Route } from "react-router-dom";
-
 
 function AppRoutes() {
   return (
@@ -14,6 +14,8 @@ function AppRoutes() {
       <Route path="/admin" element={<Admin />} />
       <Route path="/admin/edit/:pointId" element={<PointDetails />} />
       <Route path="/admin/create" element={<CreatePoint />} />
+      
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

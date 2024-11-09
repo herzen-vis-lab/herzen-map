@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { TextField, MenuItem, Grid, Typography, Button } from '@mui/material';
-import { getTypeLabel } from 'components/Admin/AdminTable/ColumnsConfig';
-import { getStatusLabel } from 'components/Admin/AdminTable/ColumnsConfig';
+import { getTypeLabel, getStatusLabel } from 'utils';
 import { Point } from "components/Admin/type";
 import { initialData } from './initialData';
 

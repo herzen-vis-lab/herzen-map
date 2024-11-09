@@ -1,6 +1,5 @@
 import { columns } from './ColumnsConfig';
-import { getTypeLabel } from './pointType';
-import { getStatusLabel } from './pointStatus';
+import { getTypeLabel, getStatusLabel } from 'utils';
 
 export {
     getStatusLabel,

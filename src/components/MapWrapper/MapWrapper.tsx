@@ -7,7 +7,6 @@ import {
   Box,
   FormControl,
   Modal,
-  styled,
   FormGroup,
   FormControlLabel,
   Checkbox
@@ -31,75 +30,26 @@ import useUserData from "hooks/useUserData"; // хук для redux-toolkit чт
 import { AppDispatch } from "store/store"; // подтягиваем тип для useDispatch
 import { useTranslation } from "react-i18next";
 import { languages } from "i18n";
+import { getYMapLanguage } from "utils";
+import { initialPoints } from "./initialPoints";
 import "./MapWrapper.css";
 
-const modalStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.default",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
 
-const FieldContainer = styled(Box)(() => ({
-  display: "flex",
-  width: "100%",
-  alignItems: "center"
-}));
-
-const initialPoints = {
-  data: [
-    {
-      id: "1",
-      longitude: "",
-      latitude: "",
-      project_id: "",
-      status_id: 1,
-      type_id: "",
-      photos: [],
-      web: "",
-      names: { en: "", ru: "", zh: "" },
-      descriptions: { en: "", ru: "", zh: "" },
-      createdAt: "",
-      updatedAt: "",
-    },
-  ],
-  loading: "",
-  error: "",
-};
-
-export default function MapWrapper() {
+const MapWrapper = () => {
   const [open, setOpen] = useState(false);
+  const { t, i18n } = useTranslation();
+  const [lang, setLang] = useState(getYMapLanguage(i18n.language));
+
+  // state для повторного рендеринга в блоке return
+  const [pointType, setPointType] = useState('');
+  const [points, setPoints] = useState(initialPoints);
+
   const handleOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
-
-  const { t, i18n } = useTranslation();
-  const [lang, setLang] = useState(GetYMapsLanguage(i18n.language));
-
-  function GetYMapsLanguage(lang: string) {
-    switch (lang) {
-      case "ru":
-        return "ru_RU";
-      case "en":
-        return "en_US";
-      case "zh":
-        return "en_US";
-      default:
-        return "ru_RU";
-    }
-  }
-
-  // state для повторного рендеринга в блоке return
-  const [pointType, setPointType] = useState("");
-  const [points, setPoints] = useState(initialPoints);
 
   // читаем из store
   const userData = useUserData();
@@ -125,7 +75,7 @@ export default function MapWrapper() {
 
   console.log("NODE_ENV", process.env["NODE_ENV"].toString());
 
-  function GetPlacemarks() {
+  const getPlacemarks = () => {
     return points.data
       .filter((point) => point.status_id === 1)
       .map((point) => {
@@ -152,13 +102,13 @@ export default function MapWrapper() {
             properties={{
               hintContent: names[language],
               balloonContentHeader: names[language],
-              balloonContentBody: `
-                                <div class="placemark-description">
-                                    ${descriptions[language]}
-                                </div>
-                                <div class="placemark-photo">
-                                    <img src="${photos[0]}" alt="">
-                                </div>`,
+              balloonContentBody:
+                                `<div class="placemark-description">
+                                     ${descriptions[language]}
+                                 </div>
+                                 <div class="placemark-photo">
+                                     <img src="${photos[0]}" alt="">
+                                 </div>`,
               balloonContentFooter: `<a href="${web}">Ссылка на источник</a>`,
             }}
           />
@@ -216,7 +166,7 @@ export default function MapWrapper() {
         </AppBar>
         <YMaps
           key={lang}
-          //@ts-ignore
+          // @ts-ignore
           query={{ apikey: apiKey, lang }}
         >
           <Map
@@ -237,7 +187,7 @@ export default function MapWrapper() {
             height="100vh"
           >
             <RouteButton></RouteButton>
-            {GetPlacemarks()}
+            {getPlacemarks()}
             <GeolocationControl options={{ float: "left" }} />
             <SearchControl options={{ float: "left" }} />
           </Map>
@@ -250,9 +200,13 @@ export default function MapWrapper() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={modalStyle}>
+        <Box className="settings-modal"
+          sx={{
+            backgroundColor: 'background.default',
+            color: 'text.primary',
+          }}>
           <h1>{t("site settings")}</h1>
-          <FieldContainer marginBottom={1}>
+          <Box className="fields-container">
             <FormGroup>
               <FormControlLabel
                 control={<Checkbox defaultChecked />}
@@ -269,9 +223,11 @@ export default function MapWrapper() {
                 label="Категория 3"
               />
             </FormGroup>
-          </FieldContainer>
+          </Box>
         </Box>
       </Modal>
     </>
   );
-}
+};
+
+export default MapWrapper;
