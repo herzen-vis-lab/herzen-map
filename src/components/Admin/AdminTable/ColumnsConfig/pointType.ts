@@ -46,4 +46,3 @@ export const getTypeLabel = (type_id: number): string => {
         return 'Неизвестный';
     }
   };
-  

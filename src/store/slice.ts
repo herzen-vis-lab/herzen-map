@@ -1,7 +1,6 @@
-//slice.ts
 import { createSlice } from "@reduxjs/toolkit";
-import * as api from "../api";
-//import { PointItem } from "../types";
+import * as api from "api";
+
 
 export type PointItem = {
   id: string;

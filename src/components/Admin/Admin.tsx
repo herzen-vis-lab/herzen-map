@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
-import { getAllPoints } from "../../api/points";
-import type { AppDispatch } from "../../store/store"; 
-import { AdminTable } from "./AdminTable";
 import { useEffect, useState } from "react";
+import { getAllPoints } from "api/points";
+import { AppDispatch } from "store/store"; 
+import { AdminTable } from "./AdminTable";
 
 const Admin = () => {
   // const dispatch: AppDispatch = useDispatch();

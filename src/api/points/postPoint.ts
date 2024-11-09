@@ -1,5 +1,5 @@
-import { apiUrl } from "../config";
-import { apiClient } from "../apiClient";
+import { apiUrl } from "api/config";
+import { apiClient } from "api/apiClient";
 
 
 export const postPoint = (

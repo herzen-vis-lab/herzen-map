@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { TextField, MenuItem, Grid, Typography, Button } from '@mui/material';
-import { getTypeLabel } from '../ColumnsConfig/pointType';
-import { getStatusLabel } from '../ColumnsConfig/pointStatus';
-import { Point } from "../../type";
+import { getTypeLabel } from 'components/Admin/AdminTable/ColumnsConfig';
+import { getStatusLabel } from 'components/Admin/AdminTable/ColumnsConfig';
+import { Point } from "components/Admin/type";
 
 
 const mockPoint: Point = {

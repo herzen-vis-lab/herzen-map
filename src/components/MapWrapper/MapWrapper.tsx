@@ -24,13 +24,13 @@ import {
   SearchControl,
   RouteButton,
 } from "@pbe/react-yandex-maps";
-import { apiKey, location, presetsByTypeId } from "../../constants/constants";
+import { apiKey, location, presetsByTypeId } from "constants/constants";
 import { useDispatch } from "react-redux";
-import * as api from "../../api";
-import useUserData from "../../hooks/useUserData"; // хук для redux-toolkit чтение
-import { AppDispatch } from "../../store/store"; // подтягиваем тип для useDispatch
+import * as api from "api";
+import useUserData from "hooks/useUserData"; // хук для redux-toolkit чтение
+import { AppDispatch } from "store/store"; // подтягиваем тип для useDispatch
 import { useTranslation } from "react-i18next";
-import { languages } from "../../i18n";
+import { languages } from "i18n";
 import "./MapWrapper.css";
 
 const modalStyle = {

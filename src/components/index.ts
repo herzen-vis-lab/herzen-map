@@ -1,7 +1,7 @@
-import { MapWrapper } from "./MapWrapper";
-import { Admin } from "./Admin";
-import { PointDetails } from "./Admin/AdminTable/PointDetails";
-import { CreatePoint } from "./Admin/AdminTable/CreatePoint";
+import { MapWrapper } from "components/MapWrapper";
+import { Admin } from "components/Admin";
+import { PointDetails } from "components/Admin/AdminTable/PointDetails";
+import { CreatePoint } from "components/Admin/AdminTable/CreatePoint";
 
 
 export  {

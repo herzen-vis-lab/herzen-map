@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { apiUrl } from "../config"; 
-import { projectId } from "../../constants/constants";
-import { apiClient } from "../apiClient";
+import { apiUrl } from "api/config"; 
+import { projectId } from "constants/constants";
+import { apiClient } from "api/apiClient";
 
 const pointsUrl = `${apiUrl}/api/point/project/${projectId}`;
 

@@ -1,4 +1,4 @@
-import { Point } from "../../type";
+import { Point } from "components/Admin/type";
 
 export const initialData: Point = {
     id: '',

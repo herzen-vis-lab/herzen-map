@@ -1,8 +1,10 @@
+import {
+  MapWrapper,
+  Admin,
+  PointDetails,
+  CreatePoint
+} from "components";
 import { Routes, Route } from "react-router-dom";
-import { MapWrapper } from "./components/MapWrapper";
-import { Admin } from "./components";
-import { PointDetails } from "./components";
-import { CreatePoint } from "./components";
 
 
 function AppRoutes() {
