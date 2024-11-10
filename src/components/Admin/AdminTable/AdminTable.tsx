@@ -1,3 +1,9 @@
+import { useState } from 'react';
+import { TableHeader } from './TableHeader';
+import { TableData } from './TableData';
+import { columns } from './ColumnsConfig';
+import { useNavigate } from 'react-router-dom';
+import { Point } from 'components/Admin/type';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableContainer from '@mui/material/TableContainer';
@@ -5,14 +11,11 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import TablePagination from '@mui/material/TablePagination';
-import { useState } from 'react';
-import { TableHeader } from './TableHeader';
-import { TableData } from './TableData';
-import { columns } from './ColumnsConfig';
-import { useNavigate } from 'react-router-dom';
+import DataSaverOnOutlinedIcon from '@mui/icons-material/DataSaverOnOutlined';
+import { IconButton } from '@mui/material';
 
 type Props = {
-  points: any[];
+  points: Point[];
 };
 
 const AdminTable = ({ points }: Props) => {
@@ -29,13 +32,21 @@ const AdminTable = ({ points }: Props) => {
     setPage(0);
   };
 
-  const openData = (pointId: string) => {
+  const getNestedValue = (obj: any, path: string) => {
+    return path.split('.').reduce((acc, key) => acc?.[key], obj);
+  }
+
+  const openEditData = (pointId: string) => {
     navigate(`/admin/edit/${pointId}`);
+  };
+
+  const openCreateData = () => {
+    navigate(`/admin/create`);
   };
 
   return (
     <div>
-      <TableContainer component={Paper} sx={{ maxHeight: '95vh' }}>
+      <TableContainer component={Paper} sx={{ maxHeight: '100vh' }}>
         <Table sx={{ minWidth: '100vw', borderCollapse: 'collapse' }} stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -45,12 +56,14 @@ const AdminTable = ({ points }: Props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {points.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((point) => (
-              <TableRow key={point.id} hover={true} sx={{ cursor: 'pointer' }} onClick={() => openData(point.id)}>
+            {points
+            // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            .map((point) => (
+              <TableRow key={point.id} hover={true} sx={{ cursor: 'pointer' }} onClick={() => openEditData(point.id)}>
                 {columns.map((col) => (
                   <TableData
                     key={col.label}
-                    value={col.accessor.split('.').reduce((obj, key) => obj?.[key], point)}
+                    value={getNestedValue(point, col.accessor)}
                     render={col.render}
                     maxWidth={col.maxWidth}
                   />
@@ -60,7 +73,7 @@ const AdminTable = ({ points }: Props) => {
           </TableBody>
         </Table>
       </TableContainer>
-      <TablePagination
+      {/* <TablePagination
         rowsPerPageOptions={[5, 10, 15, 20, 25, 40, 50]}
         component="div"
         count={points.length}
@@ -68,8 +81,16 @@ const AdminTable = ({ points }: Props) => {
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </div>
+      /> */}
+        <IconButton
+            sx={{position: 'absolute', top: '8px', left: '8px', zIndex: '2'}}
+            color="inherit"
+            aria-label="add"
+            onClick={() => openCreateData()}
+        >
+            <DataSaverOnOutlinedIcon />
+        </IconButton>
+  </div>
   );
 };
 

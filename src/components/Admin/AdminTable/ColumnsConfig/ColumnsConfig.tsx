@@ -1,8 +1,8 @@
 import { getStatusLabel, getTypeLabel } from 'utils';
 
 export const columns = [
-  { label: 'Названия', accessor: 'names.ru', maxWidth: 150 },
-  { label: 'Описания', accessor: 'descriptions.ru', maxWidth: 300 },
+  { label: 'Название', accessor: 'names.ru', maxWidth: 150 },
+  { label: 'Описание', accessor: 'descriptions.ru', maxWidth: 300 },
   { label: 'Долгота', accessor: 'longitude', maxWidth: 100 },
   { label: 'Широта', accessor: 'latitude', maxWidth: 100 },
   {

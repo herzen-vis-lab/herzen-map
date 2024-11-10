@@ -128,7 +128,7 @@ const PointDetails = () => {
           value={formData.type_id}
           onChange={(e) => handleChange('type_id', Number(e.target.value))}
         >
-          {[2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22].map((typeId) => (
+          {Array.from({ length: 21 }, (_, index) => index + 2).map((typeId) => (
             <MenuItem key={typeId} value={typeId}>
               {getTypeLabel(typeId)}
             </MenuItem>
