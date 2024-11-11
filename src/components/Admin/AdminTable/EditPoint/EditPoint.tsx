@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { TextField, MenuItem, Grid, Typography, Button } from '@mui/material';
+import { TextField, MenuItem, Grid, Typography, Button, IconButton } from '@mui/material';
 import { getTypeLabel, getStatusLabel } from 'utils';
 import { Point } from "components/Admin/type";
-
+import DeleteIcon from '@mui/icons-material/Delete';
+import SendIcon from '@mui/icons-material/Send';
 
 const mockPoint: Point = {
   id: '1',
@@ -24,7 +25,7 @@ const mockPoint: Point = {
   photos: ['https://example.com/photo1.jpg'],
 };
 
-const PointDetails = () => {
+const EditPoint = () => {
   const [formData, setFormData] = useState<Point>(mockPoint);
 
   const handleChange = (field: keyof Point, value: Number) => {
@@ -170,13 +171,28 @@ const PointDetails = () => {
           value={formData.photos[0] || ''}
         />
       </Grid> 
-        <Grid item xs={12}>
-            <Button variant="contained" color="info" fullWidth>
-                СОХРАНИТЬ
+        <Grid item xs={12} sm={10}>
+            <Button
+              variant="contained" 
+              color="info"
+              fullWidth
+              startIcon={<SendIcon />}
+            >
+              СОХРАНИТЬ
+            </Button>
+        </Grid>
+        <Grid item xs={12} sm={2}>
+              <Button
+                variant="contained"
+                color='error'
+                fullWidth
+                startIcon={<DeleteIcon />}
+              >
+                УДАЛИТЬ
             </Button>
         </Grid>
     </Grid>
   );
 };
 
-export default PointDetails;
+export default EditPoint;

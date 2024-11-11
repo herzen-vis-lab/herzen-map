@@ -14,10 +14,10 @@ const cellStyles = {
   borderRight: '1px solid #ddd',
 };
 
-const TableDataCell = ({ value, render, maxWidth }: TableDataCellProps) => (
+const TableData = ({ value, render, maxWidth }: TableDataCellProps) => (
   <TableCell align="center" sx={{ ...cellStyles, maxWidth }}>
     {render ? render(value) : value}
   </TableCell>
 );
 
-export default TableDataCell;
+export default TableData;

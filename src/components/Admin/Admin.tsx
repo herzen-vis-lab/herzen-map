@@ -14,7 +14,6 @@ const Admin = () => {
   // const dispatch: AppDispatch = useDispatch();
   // const [points, setPoints] = useState([]);
 
-
   const points = [
     {
           "id": "9e5e6d69-0231-47ab-aa9b-85feec546be2",
@@ -502,7 +501,6 @@ const Admin = () => {
     "updatedAt": "2024-09-11T14:15:32.436Z"
   }]
 
-
   // useEffect(() => {
   //   const fetchPoints = async () => {
   //     try {
@@ -517,20 +515,19 @@ const Admin = () => {
   // }, [dispatch]);
 
 
-    const getNestedValue = (obj: any, path: string) => {
-        return path.split('.').reduce((acc, key) => acc?.[key], obj);
-    };
+  const getNestedValue = (obj: any, path: string) => {
+    return path.split('.').reduce((acc, key) => acc?.[key], obj);
+  };
 
-    const filteredPoints = points.filter((point) =>
-        columns.some((col) => {
+  const filteredPoints = points.filter((point) =>
+    columns.some((col) => {
         const value = getNestedValue(point, col.accessor);
-        return (
-            typeof value === 'string' &&
-            value.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-        })
-    );
-
+            return (
+                typeof value === 'string' &&
+                value.toLowerCase().includes(searchQuery.toLowerCase())
+            );
+    })
+  );
 
   return (
     <>
@@ -544,23 +541,23 @@ const Admin = () => {
         </IconButton>
 
         {showSearch && (
-        <TextField
-          variant="outlined"
-          size="small"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Название / описание"
-          sx={{
-            backgroundColor: 'background.default',
-            color: 'text.primary',
-            position: 'absolute',
-            top: '8px',
-            left: '100px',
-            width: '200px',
-            zIndex: 5,
-          }}
-        />
-      )}
+            <TextField
+            variant="outlined"
+            size="small"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Название / описание"
+            sx={{
+                backgroundColor: 'background.default',
+                color: 'text.primary',
+                position: 'absolute',
+                top: '8px',
+                left: '100px',
+                width: '200px',
+                zIndex: 5,
+            }}
+            />
+        )}
 
         <AdminTable points={filteredPoints} />
     </>

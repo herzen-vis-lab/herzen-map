@@ -1,7 +1,7 @@
 import {
   MapWrapper,
   Admin,
-  PointDetails,
+  EditPoint,
   CreatePoint,
   NotFound
 } from "components";
@@ -12,7 +12,7 @@ function AppRoutes() {
     <Routes>
       <Route path="/" element={<MapWrapper />} />
       <Route path="/admin" element={<Admin />} />
-      <Route path="/admin/edit/:pointId" element={<PointDetails />} />
+      <Route path="/admin/edit/:pointId" element={<EditPoint />} />
       <Route path="/admin/create" element={<CreatePoint />} />
       
       <Route path="*" element={<NotFound />} />

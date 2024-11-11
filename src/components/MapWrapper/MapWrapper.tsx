@@ -145,8 +145,7 @@ const MapWrapper = () => {
                         value={language}
                         onClick={() => {
                           i18n.changeLanguage(languageCode);
-                          //@ts-ignore
-                          setLang(GetYMapsLanguage(language));
+                          setLang(getYMapLanguage(language));
                         }}
                       >
                         {language}
@@ -166,7 +165,6 @@ const MapWrapper = () => {
         </AppBar>
         <YMaps
           key={lang}
-          // @ts-ignore
           query={{ apikey: apiKey, lang }}
         >
           <Map
