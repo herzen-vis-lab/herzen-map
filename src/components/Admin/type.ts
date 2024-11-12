@@ -1,4 +1,5 @@
 export type Point = {
+    project_id: "1";
     id: string;
     longitude: number | '';
     latitude: number | '';

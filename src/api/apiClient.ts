@@ -6,9 +6,9 @@ export const apiClient = async (url: string, options: RequestOptions) => {
   try {
     const response = await fetch(url, {
       method,
-      // headers: {
-      //   'Content-Type': 'application/json',
-      // },
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: body ? JSON.stringify(body) : undefined,
     });
 
@@ -16,7 +16,7 @@ export const apiClient = async (url: string, options: RequestOptions) => {
       throw new Error(`Network response was not ok: ${response.status} ${response.statusText}`);
     }
 
-    return await response.json();
+    return response.json();
   } catch (error) {
     throw new Error(`API request failed: ${error}`);
   }

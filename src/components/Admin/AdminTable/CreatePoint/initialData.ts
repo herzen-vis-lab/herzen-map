@@ -1,6 +1,7 @@
 import { Point } from "components/Admin/type";
 
 export const initialData: Point = {
+    project_id: '1',
     id: '',
     longitude: '', 
     latitude: '',

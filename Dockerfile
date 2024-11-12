@@ -12,7 +12,7 @@ WORKDIR /usr/src/app
 # Copy app files
 COPY --chown=node:node . /usr/src/app
 
-# Install only production dependencies
+# Install all dependencies
 RUN npm i
 
 USER node
