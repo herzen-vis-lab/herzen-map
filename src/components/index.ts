@@ -1,13 +1,15 @@
-import { MapWrapper } from "components/MapWrapper";
-import { Admin } from "components/Admin";
+import { MapWrapper } from "./MapWrapper";
+import { Admin } from "./Admin";
 import { EditPoint } from "components/Admin/AdminTable/EditPoint";
 import { CreatePoint } from "components/Admin/AdminTable/CreatePoint";
-import { NotFound } from "components/NotFound";
+import { NotFound } from "./NotFound";
+import { CustomSnackbar } from "./SnackBar";
 
 export  {
     MapWrapper,
     Admin,
     EditPoint,
     CreatePoint,
-    NotFound
+    NotFound,
+    CustomSnackbar
 }

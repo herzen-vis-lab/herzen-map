@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { TextField, MenuItem, Grid, Typography, Button, IconButton } from '@mui/material';
+import { TextField, MenuItem, Grid, Typography, Button, Box, Modal } from '@mui/material';
 import { getTypeLabel, getStatusLabel } from 'utils';
 import { Point } from "components/Admin/type";
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
+import { DeleteModal } from 'components/Admin/AdminTable/DeleteModal';
+
 
 const mockPoint: Point = {
   id: '1',
@@ -27,6 +29,10 @@ const mockPoint: Point = {
 
 const EditPoint = () => {
   const [formData, setFormData] = useState<Point>(mockPoint);
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleOpenModal = () => setOpenModal(true);
+  const handleCloseModal = () => setOpenModal(false);
 
   const handleChange = (field: keyof Point, value: Number) => {
     setFormData((prev) => ({
@@ -34,7 +40,6 @@ const EditPoint = () => {
       [field]: value,
     }));
   };
-
 
   return (
     <Grid container spacing={3} sx={{padding: 5}}>
@@ -182,15 +187,21 @@ const EditPoint = () => {
             </Button>
         </Grid>
         <Grid item xs={12} sm={2}>
-              <Button
-                variant="contained"
-                color='error'
-                fullWidth
-                startIcon={<DeleteIcon />}
-              >
-                УДАЛИТЬ
-            </Button>
+          <Button
+            variant="contained"
+            color='error'
+            fullWidth
+            startIcon={<DeleteIcon />}
+            onClick={() => handleOpenModal()}
+          >
+            УДАЛИТЬ
+          </Button>
         </Grid>
+        <DeleteModal
+          open={openModal}
+          onClose={handleCloseModal}
+          pointName={formData.names.ru}
+        />
     </Grid>
   );
 };
