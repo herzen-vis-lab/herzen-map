@@ -1,4 +1,4 @@
-FROM node
+FROM node:20
 
 # Optimise for production
 ENV NODE_ENV production
@@ -13,9 +13,8 @@ WORKDIR /usr/src/app
 COPY --chown=node:node . /usr/src/app
 
 # Install only production dependencies
-RUN npm ci --only=production
+RUN npm i
 
-# friends don’t let friends run containers as root!
 USER node
 
 # Make port 3000 accessible outside of the container
