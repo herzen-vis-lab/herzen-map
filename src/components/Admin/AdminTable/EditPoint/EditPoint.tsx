@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TextField, MenuItem, Grid, Typography, Button, Box, Modal } from '@mui/material';
+import { TextField, MenuItem, Grid, Typography, Button } from '@mui/material';
 import { getTypeLabel, getStatusLabel } from 'utils';
 import { Point } from "components/Admin/type";
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -47,7 +47,6 @@ const EditPoint = () => {
         <Typography variant="h4" align='center'>Редактирование точки</Typography>
       </Grid>
 
-      {/* Names fields (ru, en, zh) */}
       <Grid item xs={4}>
         <TextField
           label="Название (RU)"
@@ -73,40 +72,36 @@ const EditPoint = () => {
         />
       </Grid>
       
+      <Grid item container spacing={2} xs={12}>
+          <Grid item xs={4}>
+              <TextField
+              label="Описание (RU)"
+              variant="outlined"
+              fullWidth
+              multiline
+              value={formData.descriptions.ru}
+              />
+          </Grid>
+          <Grid item xs={4}>
+              <TextField
+              label="Описание (EN)"
+              variant="outlined"
+              fullWidth
+              multiline
+              value={formData.descriptions.en}
+              />
+          </Grid>
+          <Grid item xs={4}>
+              <TextField
+              label="Описание (ZH)"
+              variant="outlined"
+              fullWidth
+              multiline
+              value={formData.descriptions.zh}
+              />
+          </Grid>
+      </Grid>
 
-      {/* Descriptions fields (ru, en, zh) */}
-        <Grid item container spacing={2} xs={12}>
-            <Grid item xs={4}>
-                <TextField
-                label="Описание (RU)"
-                variant="outlined"
-                fullWidth
-                multiline
-                value={formData.descriptions.ru}
-                />
-            </Grid>
-            <Grid item xs={4}>
-                <TextField
-                label="Описание (EN)"
-                variant="outlined"
-                fullWidth
-                multiline
-                value={formData.descriptions.en}
-                />
-            </Grid>
-            <Grid item xs={4}>
-                <TextField
-                label="Описание (ZH)"
-                variant="outlined"
-                fullWidth
-                multiline
-                value={formData.descriptions.zh}
-                />
-            </Grid>
-        </Grid>
-
-
-      {/* Longitude and Latitude fields */}
       <Grid item xs={6}>
         <TextField
           label="Долгота"
@@ -124,7 +119,6 @@ const EditPoint = () => {
         />
       </Grid>
 
-      {/* Type and Status dropdowns */}
       <Grid item xs={6}>
         <TextField
           label="Тип"
@@ -159,7 +153,6 @@ const EditPoint = () => {
         </TextField>
       </Grid>
 
-      {/* Web and Photos fields */}
       <Grid item xs={12}>
         <TextField
           label="Веб-сайт"
@@ -186,6 +179,7 @@ const EditPoint = () => {
               СОХРАНИТЬ
             </Button>
         </Grid>
+
         <Grid item xs={12} sm={2}>
           <Button
             variant="contained"
@@ -197,6 +191,7 @@ const EditPoint = () => {
             УДАЛИТЬ
           </Button>
         </Grid>
+
         <DeleteModal
           open={openModal}
           onClose={handleCloseModal}

@@ -3,18 +3,49 @@ import {
   Admin,
   EditPoint,
   CreatePoint,
-  NotFound
+  NotFound,
+  Login
 } from "components";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
-function AppRoutes() {
+
+const PrivateRoute = ({ children }: any) => {
+  const authToken = localStorage.getItem("authToken");
+
+  return authToken ? children : <Navigate to="/login" />;
+};
+
+const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<MapWrapper />} />
-      <Route path="/admin" element={<Admin />} />
-      <Route path="/admin/edit/:pointId" element={<EditPoint />} />
-      <Route path="/admin/create" element={<CreatePoint />} />
-      
+
+      <Route
+        path="/admin"
+        element={
+          <PrivateRoute>
+            <Admin />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/admin/edit/:pointId"
+        element={
+          <PrivateRoute>
+            <EditPoint />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/admin/create"
+        element={
+          <PrivateRoute>
+            <CreatePoint />
+          </PrivateRoute>
+        }
+      />
+
+      <Route path="/login" element={<Login />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

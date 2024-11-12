@@ -33,12 +33,14 @@ import { languages } from "i18n";
 import { getYMapLanguage } from "utils";
 import { initialPoints } from "./initialPoints";
 import "./MapWrapper.css";
+import { useNavigate } from "react-router";
 
 
 const MapWrapper = () => {
   const [open, setOpen] = useState(false);
   const { t, i18n } = useTranslation();
   const [lang, setLang] = useState(getYMapLanguage(i18n.language));
+  const navigate = useNavigate();
 
   // state для повторного рендеринга в блоке return
   const [pointType, setPointType] = useState('');
@@ -50,6 +52,9 @@ const MapWrapper = () => {
   const handleClose = () => {
     setOpen(false);
   };
+  const handleLogin = () => {
+    navigate(`/login`);
+  }
 
   // читаем из store
   const userData = useUserData();
@@ -133,7 +138,6 @@ const MapWrapper = () => {
                   sx={{
                     color: "white",
                     "& .MuiSvgIcon-root": { color: "white" },
-                    borderRadius: "0px", //not working
                   }}
                   IconComponent={LanguageIcon}
                 >
@@ -158,7 +162,7 @@ const MapWrapper = () => {
             <IconButton color="inherit" onClick={handleOpen}>
               <LayersIcon />
             </IconButton>
-            <IconButton color="inherit">
+            <IconButton color="inherit" onClick={handleLogin}>
               <AccountCircleIcon />
             </IconButton>
           </Toolbar>

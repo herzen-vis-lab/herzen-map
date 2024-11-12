@@ -3,7 +3,7 @@ import { TextField, MenuItem, Grid, Typography, Button } from '@mui/material';
 import { getTypeLabel, getStatusLabel } from 'utils';
 import { Point } from "components/Admin/type";
 import { initialData } from './initialData';
-
+import SendIcon from '@mui/icons-material/Send';
 
 
 const CreatePoint = () => {
@@ -33,7 +33,6 @@ const CreatePoint = () => {
         <Typography variant="h4" align="center">Создание точки</Typography>
       </Grid>
 
-      {/* Names fields (ru, en, zh) */}
       <Grid item xs={4}>
         <TextField
           label="Название (RU)"
@@ -62,7 +61,6 @@ const CreatePoint = () => {
         />
       </Grid>
 
-      {/* Descriptions fields (ru, en, zh) */}
       <Grid item container spacing={2} xs={12}>
         <Grid item xs={4}>
           <TextField
@@ -96,7 +94,6 @@ const CreatePoint = () => {
         </Grid>
       </Grid>
 
-      {/* Longitude and Latitude fields */}
       <Grid item xs={6}>
         <TextField
           label="Долгота"
@@ -118,7 +115,6 @@ const CreatePoint = () => {
         />
       </Grid>
 
-      {/* Type and Status dropdowns */}
       <Grid item xs={6}>
         <TextField
           label="Тип"
@@ -128,7 +124,7 @@ const CreatePoint = () => {
           value={formData.type_id}
           onChange={(e) => handleChange('type_id', Number(e.target.value))}
         >
-          {[2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22].map((typeId) => (
+          {Array.from({ length: 21 }, (_, index) => index + 2).map((typeId) => (
             <MenuItem key={typeId} value={typeId}>
               {getTypeLabel(typeId)}
             </MenuItem>
@@ -152,7 +148,6 @@ const CreatePoint = () => {
         </TextField>
       </Grid>
 
-      {/* Web and Photos fields */}
       <Grid item xs={12}>
         <TextField
           label="Веб-сайт"
@@ -173,7 +168,12 @@ const CreatePoint = () => {
       </Grid>
 
       <Grid item xs={12}>
-        <Button variant="contained" color="info" fullWidth>
+        <Button
+         variant="contained"
+         color="info"
+         fullWidth
+         startIcon={<SendIcon />}
+        >
           СОХРАНИТЬ
         </Button>
       </Grid>
