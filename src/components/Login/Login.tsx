@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { TextField, Button, Box, Typography, Container, Paper, Alert } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { createToken, checkToken } from "utils";
+import { createToken, checkToken, hashPassword } from "utils";
 
 
 const Login = () => {
@@ -19,10 +19,14 @@ const Login = () => {
     }
   }, [navigate]);
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
+    const storedHash = process.env.REACT_APP_ADMIN_PASSWORD_HASH;
+
+    const hashedPassword = await hashPassword(password);
+
     if (
       username === process.env.REACT_APP_ADMIN_USERNAME &&
-      password === process.env.REACT_APP_ADMIN_PASSWORD
+      hashedPassword === storedHash
     ) {
       setError(false);
       const token = createToken(username);
