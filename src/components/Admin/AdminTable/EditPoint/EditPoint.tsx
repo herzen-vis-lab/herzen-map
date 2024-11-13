@@ -1,29 +1,37 @@
 import { useEffect, useState } from 'react';
-import { TextField, MenuItem, Grid, Typography, Button } from '@mui/material';
+import { TextField, MenuItem, Grid, Typography, Button, AlertColor } from '@mui/material';
 import { getTypeLabel, getStatusLabel } from 'utils';
 import { Point } from "components/Admin/type";
 import SendIcon from '@mui/icons-material/Send';
 import { getPoint, patchPoint } from 'api/points';
 import { useParams } from 'react-router';
 import { ImagePreviewOnHover } from '../ImagePreviewOnHover';
+import { CustomSnackbar } from 'components/SnackBar';
+
 
 const EditPoint = () => {
   const [point, setPoint] = useState<Point | null>(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState<AlertColor>('success');
+
   const params = useParams();
   const pointId = String(params.pointId);
 
   const handleSave = async () => {
     if (!point) return;
     setLoading(true);
-    setError(null);
     try {
       await patchPoint(pointId, point);
-      console.log("Point updated successfully");
+      setSnackbarMessage("Точка успешно изменена!");
+      setSnackbarSeverity("success");
+      setSnackbarOpen(true);
     } catch (error) {
       console.error("Error updating point:", error);
-      setError("Не удалось сохранить изменения." + error);
+      setSnackbarMessage("Не удалось применить изменения!");
+      setSnackbarSeverity("error");
+      setSnackbarOpen(true);
     } finally {
       setLoading(false);
     }
@@ -232,7 +240,11 @@ const EditPoint = () => {
         >
           СОХРАНИТЬ
         </Button>
-        {error && <Typography color="error">{error}</Typography>}
+        <CustomSnackbar
+          open={snackbarOpen}
+          message={snackbarMessage}
+          severity={snackbarSeverity}
+        />
       </Grid>
     </Grid>
   );

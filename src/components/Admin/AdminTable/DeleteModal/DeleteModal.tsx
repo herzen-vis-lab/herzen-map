@@ -50,7 +50,6 @@ const DeleteModal = ({ open, onClose, pointName }: DeleteModalProps) => {
 
       <CustomSnackbar
         open={snackbarOpen}
-        onClose={handleSnackbarClose}
         message={`Точка успешно удалена!`}
         severity="success"
       />

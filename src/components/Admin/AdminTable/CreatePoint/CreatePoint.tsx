@@ -1,17 +1,23 @@
 import { useState } from 'react';
-import { TextField, MenuItem, Grid, Typography, Button } from '@mui/material';
+import { TextField, MenuItem, Grid, Typography, Button, AlertColor } from '@mui/material';
 import { getTypeLabel, getStatusLabel } from 'utils';
 import { Point } from "components/Admin/type";
 import { initialData } from './initialData';
 import { postPoint } from 'api/points';
 import SendIcon from '@mui/icons-material/Send';
 import { ImagePreviewOnHover } from '../ImagePreviewOnHover';
+import { CustomSnackbar } from 'components/SnackBar';
+import { useNavigate } from 'react-router';
 
 
 const CreatePoint = () => {
   const [point, setPoint] = useState<Point>(initialData);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState<AlertColor>('success');
+  const navigate = useNavigate();
+
 
   const handleChange = (field: keyof Point, value: any) => {
     setPoint((prev) => ({
@@ -23,13 +29,20 @@ const CreatePoint = () => {
   const handleSave = async () => {
     if (!point) return;
     setLoading(true);
-    setError(null);
     try {
       await postPoint(point);
-      console.log("Point created successfully");
+      setTimeout(() => {
+        navigate('/admin');
+      }, 500);
+      setSnackbarMessage("Точка успешно создана!");
+      setSnackbarSeverity("success");
+      setSnackbarOpen(true);
+
     } catch (error) {
       console.error("Error creating point:", error);
-      setError("Не удалось сохранить новую точку." + error);
+      setSnackbarMessage("Не удалось создать точку!");
+      setSnackbarSeverity("error");
+      setSnackbarOpen(true);
     } finally {
       setLoading(false);
     }
@@ -184,7 +197,7 @@ const CreatePoint = () => {
             variant="outlined"
             fullWidth
             value={point?.picture || ''}
-            onChange={(e) => handleChange('picture', [e.target.value])}
+            onChange={(e) => handleChange('picture', e.target.value)}
             InputLabelProps={{ shrink: true }}
           />
         </ImagePreviewOnHover>
@@ -201,7 +214,11 @@ const CreatePoint = () => {
         >
           СОХРАНИТЬ
         </Button>
-        {error && <Typography color="error">{error}</Typography>}
+        <CustomSnackbar
+          open={snackbarOpen}
+          message={snackbarMessage}
+          severity={snackbarSeverity}
+        />
       </Grid>
     </Grid>
   );
