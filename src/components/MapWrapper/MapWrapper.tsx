@@ -91,7 +91,7 @@ const MapWrapper = () => {
           descriptions,
           web,
           type_id,
-          photos
+          picture
         } = point;
         const language = i18n.language as keyof typeof names;
 
@@ -112,7 +112,7 @@ const MapWrapper = () => {
                                      ${descriptions[language]}
                                  </div>
                                  <div class="placemark-photo">
-                                     <img src="${photos[0]}" alt="">
+                                     <img src="${picture}" alt="">
                                  </div>`,
               balloonContentFooter: `<a href="${web}">Ссылка на источник</a>`,
             }}

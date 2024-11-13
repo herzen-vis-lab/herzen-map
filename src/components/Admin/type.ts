@@ -8,5 +8,5 @@ export type Point = {
     type_id: number | '';
     status_id: number | '';
     web: string;
-    photos: string[];
+    picture: string;
 };

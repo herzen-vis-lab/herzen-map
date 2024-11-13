@@ -5,6 +5,7 @@ import { Point } from "components/Admin/type";
 import { initialData } from './initialData';
 import { postPoint } from 'api/points';
 import SendIcon from '@mui/icons-material/Send';
+import { ImagePreviewOnHover } from '../ImagePreviewOnHover';
 
 
 const CreatePoint = () => {
@@ -175,14 +176,18 @@ const CreatePoint = () => {
           onChange={(e) => handleChange('web', e.target.value)}
         />
       </Grid>
+
       <Grid item xs={12}>
-        <TextField
-          label="Фото URL"
-          variant="outlined"
-          fullWidth
-          value={point.photos[0] || ''}
-          onChange={(e) => handleChange('photos', [e.target.value])}
-        />
+        <ImagePreviewOnHover src={point?.picture || ''} width={350} height={270}>
+          <TextField
+            label="Фото URL"
+            variant="outlined"
+            fullWidth
+            value={point?.picture || ''}
+            onChange={(e) => handleChange('picture', [e.target.value])}
+            InputLabelProps={{ shrink: true }}
+          />
+        </ImagePreviewOnHover>
       </Grid>
 
       <Grid item xs={12}>

@@ -5,7 +5,7 @@ export const initialPoints = {
       latitude: "",
       status_id: 1,
       type_id: "",
-      photos: [],
+      picture: "",
       web: "",
       names: { en: "", ru: "", zh: "" },
       descriptions: { en: "", ru: "", zh: "" },

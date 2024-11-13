@@ -8,8 +8,7 @@ export type PointItem = {
   latitude: string,
   status: string,
   type: string,
-  photos: [],
-  videos: [],
+  picture: "",
   web: string,
   locales: [{
     local: string,

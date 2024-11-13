@@ -5,6 +5,7 @@ import { Point } from "components/Admin/type";
 import SendIcon from '@mui/icons-material/Send';
 import { getPoint, patchPoint } from 'api/points';
 import { useParams } from 'react-router';
+import { ImagePreviewOnHover } from '../ImagePreviewOnHover';
 
 const EditPoint = () => {
   const [point, setPoint] = useState<Point | null>(null);
@@ -50,18 +51,6 @@ const EditPoint = () => {
   // Обработчик для полей верхнего уровня (например, longitude, latitude)
   const handleSimpleChange = (field: keyof Omit<Point, 'names' | 'descriptions'>, value: any) => {
     setPoint((prev) => (prev ? { ...prev, [field]: value } : prev));
-  };
-
-  // Обработчик для обновления первого элемента массива photos
-  const handlePhotoChange = (index: number, value: string) => {
-    setPoint((prev) => {
-      if (!prev) return prev;
-
-      const updatedPhotos = [...prev.photos];
-      updatedPhotos[index] = value;
-
-      return { ...prev, photos: updatedPhotos };
-    });
   };
 
 
@@ -218,20 +207,19 @@ const EditPoint = () => {
           InputLabelProps={{ shrink: true }}
         />
       </Grid>
+
       <Grid item xs={12}>
-        <TextField
-          label="Фото URL"
-          variant="outlined"
-          fullWidth
-          value={point?.photos?.[0] || ''}
-          onChange={(e) => handlePhotoChange(0, e.target.value)}
-          InputLabelProps={{ shrink: true }}
-        />
-        {/* <img src={point?.photos?.[0] || ''}
-          width={250}
-          height={200}
-        /> */}
-      </Grid> 
+        <ImagePreviewOnHover src={point?.picture || ''} width={350} height={270}>
+          <TextField
+            label="Фото URL"
+            variant="outlined"
+            fullWidth
+            value={point?.picture || ''}
+            onChange={(e) => handleSimpleChange('picture', e.target.value)}
+            InputLabelProps={{ shrink: true }}
+          />
+        </ImagePreviewOnHover>
+      </Grid>
 
       <Grid item xs={12}>
         <Button

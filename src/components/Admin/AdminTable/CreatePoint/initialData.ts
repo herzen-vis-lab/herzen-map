@@ -10,5 +10,5 @@ export const initialData: Point = {
     type_id: '',
     status_id: '',
     web: '',
-    photos: [''],
+    picture: '',
   };
