@@ -5,21 +5,24 @@ type CustomSnackbarProps = {
   message: string;
   severity?: AlertColor;
   autoHideDuration?: number;
+  onClose: () => void;
 };
 
 const CustomSnackbar= ({
   open,
+  onClose,
   message,
   severity = 'info',
-  autoHideDuration = 2500,
+  autoHideDuration = 1300,
 }: CustomSnackbarProps) => {
   return (
     <Snackbar
       open={open}
       autoHideDuration={autoHideDuration}
+      onClose={onClose} 
       anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
     >
-      <Alert severity={severity} sx={{ width: '100%' }}>
+      <Alert onClose={onClose} severity={severity} sx={{ width: '100%' }}>
         {message}
       </Alert>
     </Snackbar>

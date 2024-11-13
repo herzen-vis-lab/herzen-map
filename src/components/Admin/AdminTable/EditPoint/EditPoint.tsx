@@ -19,6 +19,10 @@ const EditPoint = () => {
   const params = useParams();
   const pointId = String(params.pointId);
 
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
+
   const handleSave = async () => {
     if (!point) return;
     setLoading(true);
@@ -242,6 +246,7 @@ const EditPoint = () => {
         </Button>
         <CustomSnackbar
           open={snackbarOpen}
+          onClose={handleSnackbarClose} // Проп onClose
           message={snackbarMessage}
           severity={snackbarSeverity}
         />

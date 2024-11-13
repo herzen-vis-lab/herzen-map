@@ -18,6 +18,9 @@ const CreatePoint = () => {
   const [snackbarSeverity, setSnackbarSeverity] = useState<AlertColor>('success');
   const navigate = useNavigate();
 
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
 
   const handleChange = (field: keyof Point, value: any) => {
     setPoint((prev) => ({
@@ -215,6 +218,7 @@ const CreatePoint = () => {
           СОХРАНИТЬ
         </Button>
         <CustomSnackbar
+          onClose={handleSnackbarClose}
           open={snackbarOpen}
           message={snackbarMessage}
           severity={snackbarSeverity}
