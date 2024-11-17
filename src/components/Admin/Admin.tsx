@@ -71,7 +71,6 @@ const Admin = () => {
             }}
             />
         )}
-
         <AdminTable points={filteredPoints} />
     </>
   );

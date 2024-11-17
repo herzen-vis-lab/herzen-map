@@ -4,10 +4,10 @@ import { getTypeLabel, getStatusLabel } from 'utils';
 import { Point } from "components/Admin/type";
 import { initialData } from './initialData';
 import { postPoint } from 'api/points';
-import SendIcon from '@mui/icons-material/Send';
-import { ImagePreviewOnHover } from '../ImagePreviewOnHover';
+import { ImagePreviewOnHover } from 'components';
 import { CustomSnackbar } from 'components/SnackBar';
 import { useNavigate } from 'react-router';
+import SendIcon from '@mui/icons-material/Send';
 
 
 const CreatePoint = () => {

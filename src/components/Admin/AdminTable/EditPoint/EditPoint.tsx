@@ -5,8 +5,8 @@ import { Point } from "components/Admin/type";
 import SendIcon from '@mui/icons-material/Send';
 import { getPoint, patchPoint } from 'api/points';
 import { useParams } from 'react-router';
-import { ImagePreviewOnHover } from '../ImagePreviewOnHover';
 import { CustomSnackbar } from 'components/SnackBar';
+import { ImagePreviewOnHover } from 'components';
 
 
 const EditPoint = () => {
@@ -246,7 +246,7 @@ const EditPoint = () => {
         </Button>
         <CustomSnackbar
           open={snackbarOpen}
-          onClose={handleSnackbarClose} // Проп onClose
+          onClose={handleSnackbarClose}
           message={snackbarMessage}
           severity={snackbarSeverity}
         />

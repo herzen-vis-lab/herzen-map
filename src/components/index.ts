@@ -5,6 +5,7 @@ import { CreatePoint } from "components/Admin/AdminTable/CreatePoint";
 import { NotFound } from "./NotFound";
 import { CustomSnackbar } from "./SnackBar";
 import { Login } from "./Login";
+import { ImagePreviewOnHover } from "./ImagePreviewOnHover";
 
 export  {
     MapWrapper,
@@ -13,5 +14,6 @@ export  {
     CreatePoint,
     NotFound,
     CustomSnackbar,
-    Login
+    Login,
+    ImagePreviewOnHover
 }

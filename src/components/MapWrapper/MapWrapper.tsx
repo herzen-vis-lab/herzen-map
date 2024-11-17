@@ -6,10 +6,6 @@ import {
   MenuItem,
   Box,
   FormControl,
-  Modal,
-  FormGroup,
-  FormControlLabel,
-  Checkbox
 } from "@mui/material";
 import LanguageIcon from "@mui/icons-material/Language";
 import LayersIcon from "@mui/icons-material/Layers";
@@ -34,30 +30,28 @@ import { getYMapLanguage } from "utils";
 import { initialPoints } from "./initialPoints";
 import "./MapWrapper.css";
 import { useNavigate } from "react-router";
-
+import { TypesModal } from "./TypesModal";
 
 const MapWrapper = () => {
-  const [open, setOpen] = useState(false);
-  const { t, i18n } = useTranslation();
-  const [lang, setLang] = useState(getYMapLanguage(i18n.language));
   const navigate = useNavigate();
-
-  // state для повторного рендеринга в блоке return
-  const [pointType, setPointType] = useState('');
+  const { i18n } = useTranslation();
+  const [lang, setLang] = useState(getYMapLanguage(i18n.language));
+  const [openModal, setOpenModal] = useState(false);
+  const [pointType, setPointType] = useState("");
   const [points, setPoints] = useState(initialPoints);
+  const userData = useUserData();
 
-  const handleOpen = () => {
-    setOpen(true);
+  const handleOpenModal = () => {
+    setOpenModal(true);
   };
-  const handleClose = () => {
-    setOpen(false);
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
   };
+
   const handleLogin = () => {
     navigate(`/login`);
-  }
-
-  // читаем из store
-  const userData = useUserData();
+  };
 
   useEffect(() => {
     if (userData[1] && pointType !== userData[1]) {
@@ -71,7 +65,6 @@ const MapWrapper = () => {
     }
   }, [userData, points]);
 
-  // пишем в store
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
@@ -91,7 +84,7 @@ const MapWrapper = () => {
           descriptions,
           web,
           type_id,
-          picture
+          picture,
         } = point;
         const language = i18n.language as keyof typeof names;
 
@@ -107,19 +100,18 @@ const MapWrapper = () => {
             properties={{
               hintContent: names[language],
               balloonContentHeader: names[language],
-              balloonContentBody:
-                                `<div class="placemark-description">
-                                     ${descriptions[language]}
-                                 </div>
-                                 <div class="placemark-photo">
-                                     <img src="${picture}" alt="">
-                                 </div>`,
+              balloonContentBody: `<div class="placemark-description">
+                                      ${descriptions[language]}
+                                   </div>
+                                   <div class="placemark-photo">
+                                      <img src="${picture}" alt="">
+                                   </div>`,
               balloonContentFooter: `<a href="${web}">Ссылка на источник</a>`,
             }}
           />
         );
       });
-  }
+  };
 
   return (
     <>
@@ -159,7 +151,7 @@ const MapWrapper = () => {
                 </Select>
               </FormControl>
             </Box>
-            <IconButton color="inherit" onClick={handleOpen}>
+            <IconButton color="inherit" onClick={handleOpenModal}>
               <LayersIcon />
             </IconButton>
             <IconButton color="inherit" onClick={handleLogin}>
@@ -167,10 +159,7 @@ const MapWrapper = () => {
             </IconButton>
           </Toolbar>
         </AppBar>
-        <YMaps
-          key={lang}
-          query={{ apikey: apiKey, lang }}
-        >
+        <YMaps key={lang} query={{ apikey: apiKey, lang }}>
           <Map
             defaultState={{
               center: [location.center[1], location.center[0]],
@@ -195,39 +184,7 @@ const MapWrapper = () => {
           </Map>
         </YMaps>
       </div>
-
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box className="settings-modal"
-          sx={{
-            backgroundColor: 'background.default',
-            color: 'text.primary',
-          }}>
-          <h1>{t("site settings")}</h1>
-          <Box className="fields-container">
-            <FormGroup>
-              <FormControlLabel
-                control={<Checkbox defaultChecked />}
-                label="Категория 1"
-              />
-              <FormControlLabel
-                required
-                control={<Checkbox />}
-                label="Категория 2"
-              />
-              <FormControlLabel
-                disabled
-                control={<Checkbox />}
-                label="Категория 3"
-              />
-            </FormGroup>
-          </Box>
-        </Box>
-      </Modal>
+      <TypesModal open={openModal} onClose={handleCloseModal} />
     </>
   );
 };
