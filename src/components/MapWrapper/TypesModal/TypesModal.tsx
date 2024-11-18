@@ -1,4 +1,5 @@
-import { Modal, Box, FormGroup, FormControlLabel, Checkbox } from '@mui/material';
+import { useState, useEffect } from 'react';
+import { Modal, Box, FormGroup, FormControlLabel, Checkbox, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { getTypeLabel } from 'utils';
 
@@ -9,32 +10,86 @@ type TypesModalProps = {
 
 const TypesModal = ({ open, onClose }: TypesModalProps) => {
   const { t } = useTranslation();
-
   const typeIds = Array.from({ length: 21 }, (_, index) => index + 2);
+
+  const [selectedTypes, setSelectedTypes] = useState<number[]>(() => {
+    const storedTypes = localStorage.getItem('selectedTypeIds');
+    return storedTypes ? JSON.parse(storedTypes) : typeIds;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('selectedTypeIds', JSON.stringify(selectedTypes));
+  }, [selectedTypes]);
+
+  const handleCheckboxChange = (typeId: number) => {
+    setSelectedTypes((prevSelected) =>
+      prevSelected.includes(typeId)
+        ? prevSelected.filter((id) => id !== typeId)
+        : [...prevSelected, typeId]
+    );
+  };
+
+  const handleSelectAllChange = () => {
+    if (selectedTypes.length === typeIds.length) {
+      setSelectedTypes([]);
+    } else {
+      setSelectedTypes(typeIds);
+    }
+  };
 
   return (
     <Modal
+      sx={{
+        justifyContent: 'center',
+        alignItems: 'center',
+        display: 'flex',
+      }}
       open={open}
       onClose={onClose}
     >
       <Box
-        className="settings-modal"
         sx={{
           backgroundColor: 'background.default',
           color: 'text.primary',
-          padding: 2,
+          padding: 3,
           borderRadius: 2,
           maxWidth: 400,
           margin: 'auto',
+          overflow: 'hidden',
+          position: 'relative',
         }}
       >
-        <h2>{t("site settings")}</h2>
-        <Box className="fields-container">
+        <Typography variant="h5" component="h2">
+          {t('site settings')}
+        </Typography>
+        <Box
+          sx={{
+            maxHeight: 500,
+            overflowY: 'scroll',
+            mt: 1,
+            pr: 1,
+            pl: 1.5,
+          }}
+        >
           <FormGroup>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={selectedTypes.length === typeIds.length}
+                  onChange={handleSelectAllChange}
+                />
+              }
+              label={t('select all')}
+            />
             {typeIds.map((typeId) => (
               <FormControlLabel
                 key={typeId}
-                control={<Checkbox />}
+                control={
+                  <Checkbox
+                    checked={selectedTypes.includes(typeId)}
+                    onChange={() => handleCheckboxChange(typeId)}
+                  />
+                }
                 label={getTypeLabel(typeId)}
               />
             ))}

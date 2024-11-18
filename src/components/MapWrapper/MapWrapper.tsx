@@ -14,19 +14,18 @@ import { useState, useEffect } from "react";
 import {
   YMaps,
   Map,
-  Placemark,
   GeolocationControl,
   SearchControl,
   RouteButton,
 } from "@pbe/react-yandex-maps";
-import { apiKey, location, presetsByTypeId } from "constants/constants";
+import { apiKey, location } from "constants/constants";
 import { useDispatch } from "react-redux";
 import * as api from "api";
 import useUserData from "hooks/useUserData"; // хук для redux-toolkit чтение
 import { AppDispatch } from "store/store"; // подтягиваем тип для useDispatch
 import { useTranslation } from "react-i18next";
 import { languages } from "i18n";
-import { getYMapLanguage } from "utils";
+import { getPlacemarks, getYMapLanguage } from "utils";
 import { initialPoints } from "./initialPoints";
 import "./MapWrapper.css";
 import { useNavigate } from "react-router";
@@ -37,7 +36,7 @@ const MapWrapper = () => {
   const { i18n } = useTranslation();
   const [lang, setLang] = useState(getYMapLanguage(i18n.language));
   const [openModal, setOpenModal] = useState(false);
-  const [pointType, setPointType] = useState("");
+  const [pointType, setPointType] = useState('');
   const [points, setPoints] = useState(initialPoints);
   const userData = useUserData();
 
@@ -72,46 +71,6 @@ const MapWrapper = () => {
   }, [dispatch]);
 
   console.log("NODE_ENV", process.env["NODE_ENV"].toString());
-
-  const getPlacemarks = () => {
-    return points.data
-      .filter((point) => point.status_id === 1)
-      .map((point) => {
-        const {
-          longitude,
-          latitude,
-          names,
-          descriptions,
-          web,
-          type_id,
-          picture,
-        } = point;
-        const language = i18n.language as keyof typeof names;
-
-        const numericTypeId = Number(type_id);
-        const preset =
-          presetsByTypeId[numericTypeId] || "islands#blueLeisureIcon";
-
-        return (
-          <Placemark
-            modules={["geoObject.addon.balloon", "geoObject.addon.hint"]}
-            defaultGeometry={[longitude, latitude]}
-            options={{ preset }}
-            properties={{
-              hintContent: names[language],
-              balloonContentHeader: names[language],
-              balloonContentBody: `<div class="placemark-description">
-                                      ${descriptions[language]}
-                                   </div>
-                                   <div class="placemark-photo">
-                                      <img src="${picture}" alt="">
-                                   </div>`,
-              balloonContentFooter: `<a href="${web}">Ссылка на источник</a>`,
-            }}
-          />
-        );
-      });
-  };
 
   return (
     <>
@@ -178,7 +137,7 @@ const MapWrapper = () => {
             height="100vh"
           >
             <RouteButton></RouteButton>
-            {getPlacemarks()}
+            {getPlacemarks(points.data, i18n.language)}
             <GeolocationControl options={{ float: "left" }} />
             <SearchControl options={{ float: "left" }} />
           </Map>
