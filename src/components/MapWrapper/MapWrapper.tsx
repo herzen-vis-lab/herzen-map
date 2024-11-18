@@ -25,11 +25,12 @@ import useUserData from "hooks/useUserData"; // хук для redux-toolkit чт
 import { AppDispatch } from "store/store"; // подтягиваем тип для useDispatch
 import { useTranslation } from "react-i18next";
 import { languages } from "i18n";
-import { getPlacemarks, getYMapLanguage } from "utils";
+import { getYMapLanguage } from "utils";
 import { initialPoints } from "./initialPoints";
 import "./MapWrapper.css";
 import { useNavigate } from "react-router";
 import { TypesModal } from "./TypesModal";
+import { getPlacemarks } from "./getPlacemarks";
 
 const MapWrapper = () => {
   const navigate = useNavigate();
