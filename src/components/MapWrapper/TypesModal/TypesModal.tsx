@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Modal, Box, FormGroup, FormControlLabel, Checkbox, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { getTypeLabel } from 'utils';
+import { Theme } from '@mui/material/styles'; 
 
 type TypesModalProps = {
   open: boolean;
@@ -64,11 +65,12 @@ const TypesModal = ({ open, onClose }: TypesModalProps) => {
         </Typography>
         <Box
           sx={{
-            maxHeight: 500,
+            maxHeight: '75vh',
             overflowY: 'scroll',
             mt: 1,
             pr: 1,
             pl: 1.5,
+            pb: 2
           }}
         >
           <FormGroup>
@@ -95,6 +97,18 @@ const TypesModal = ({ open, onClose }: TypesModalProps) => {
             ))}
           </FormGroup>
         </Box>
+        <Box
+          sx={{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: 65,
+            background: (theme: Theme) => 
+              `linear-gradient(to bottom, transparent, ${theme.palette.background.default})`,
+            pointerEvents: 'none',
+          }}
+        />
       </Box>
     </Modal>
   );
