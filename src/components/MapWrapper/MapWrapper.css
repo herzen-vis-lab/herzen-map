@@ -3,17 +3,58 @@
     height: 100vh;
 }
 
-.placemark-description {
-    background-color: #f0f8ff;
-    padding: 10px; 
-    border-radius: 15px;
-    font-size: 15px;
-    color: #333;
+.placemark-header h3 {
+    font-size: 20px;
+    margin: 0;
+    padding: 10px;
+    background-color: #3f51b5;
+    color: white;
+    border-radius: 12px 12px 0 0;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
 }
 
-.placemark-photo img,
-.placemark-video {
-    margin-top: 10px;
-    width: 100%;
-    border-radius: 15px;
+.placemark-body {
+    background-color: #ffffff;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.placemark-description {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.placemark-photo {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.placemark-photo img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.placemark-footer {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.placemark-footer a {
+    display: inline-block;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #3f51b5;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s;
 }

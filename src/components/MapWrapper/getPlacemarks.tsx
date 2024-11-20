@@ -51,15 +51,25 @@ export const getPlacemarks = (
           options={{ preset }}
           properties={{
             hintContent: names[language],
-            balloonContentHeader: names[language],
-            balloonContentBody: `<div class="placemark-description">
-                                    ${descriptions[language]}
-                                </div>
-                                <div class="placemark-photo">
-                                    <img src="${picture}" alt="">
-                                </div>`,
+            balloonContentHeader: `
+              <div class="placemark-header">
+                <h3>${names[language]}</h3>
+              </div>
+            `,
+            balloonContentBody: `
+              <div class="placemark-body">
+                <div class="placemark-description">
+                  ${descriptions[language]}
+                </div>
+                ${picture ? `
+                  <div class="placemark-photo">
+                    <img src="${picture}" alt="Фото точки">
+                  </div>
+                ` : ''}
+              </div>
+            `,
             balloonContentFooter: `<a href="${web}">Ссылка на источник</a>`,
-          }}
+          }}          
         />
       );
     });
