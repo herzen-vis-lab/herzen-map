@@ -137,10 +137,8 @@ const MapWrapper = () => {
             width="100vw"
             height="100vh"
           >
-            <RouteButton />
             {getPlacemarks(points.data, i18n.language)}
             <GeolocationControl options={{ float: "left" }} />
-            <SearchControl options={{ float: "left" }} />
           </Map>
         </YMaps>
       </div>
