@@ -28,6 +28,27 @@
   "dark mode": "Dark mode",
   "light mode": "Light mode",
   "categories": "Categories",
-
-  "learn": "tessssssst"
+  
+  "monument": "Monument",
+  "faculty": "Faculty",
+  "institute": "Institute",
+  "dormitory": "Dormitory",
+  "buffet": "Buffet",
+  "canteen": "Canteen",
+  "library": "Library",
+  "for_foreigners": "For foreigners",
+  "architectural_monument": "Architectural monument",
+  "landmark": "Landmark",
+  "historical_building": "Historical building",
+  "technopark": "Technopark",
+  "admissions_office": "Admissions Office",
+  "observatory": "Observatory",
+  "museum": "Museum",
+  "entrance": "Entrance",
+  "boiling_point": "Boiling Point",
+  "sports": "Sports",
+  "sdk": "SDK",
+  "hotel": "Hotel",
+  "preparatory_courses": "Preparatory courses",
+  "unknown": "Unknown"
 }

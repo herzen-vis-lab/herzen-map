@@ -10,7 +10,8 @@ type TypesModalProps = {
 };
 
 const TypesModal = ({ open, onClose }: TypesModalProps) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const currentLanguage = i18n.language as 'ru' | 'en' | 'zh';
   const typeIds = Array.from({ length: 21 }, (_, index) => index + 2);
 
   const [selectedTypes, setSelectedTypes] = useState<number[]>(() => {
@@ -54,6 +55,7 @@ const TypesModal = ({ open, onClose }: TypesModalProps) => {
           color: 'text.primary',
           padding: 3,
           borderRadius: 2,
+          width: "88vw",
           maxWidth: 400,
           margin: 'auto',
           overflow: 'hidden',
@@ -92,7 +94,7 @@ const TypesModal = ({ open, onClose }: TypesModalProps) => {
                     onChange={() => handleCheckboxChange(typeId)}
                   />
                 }
-                label={getTypeLabel(typeId)}
+                label={getTypeLabel(typeId, currentLanguage)} 
               />
             ))}
           </FormGroup>

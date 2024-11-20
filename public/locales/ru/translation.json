@@ -28,6 +28,27 @@
   "dark mode": "Тёмная тема",
   "light mode": "Светлая тема",
   "categories": "Категории",
-
-  "learn": "теееееееест"
+  
+  "monument": "Памятник",
+  "faculty": "Факультет",
+  "institute": "Институт",
+  "dormitory": "Общежитие",
+  "buffet": "Буфет",
+  "canteen": "Столовая",
+  "library": "Библиотека",
+  "for_foreigners": "Иностранцам",
+  "architectural_monument": "Памятник архитектуры",
+  "landmark": "Достопримечательность",
+  "historical_building": "Историческое здание",
+  "technopark": "Технопарк",
+  "admissions_office": "Приемная комиссия",
+  "observatory": "Обсерватория",
+  "museum": "Музей",
+  "entrance": "Вход",
+  "boiling_point": "Точка кипения",
+  "sports": "Спорт",
+  "sdk": "СДК",
+  "hotel": "Гостиница",
+  "preparatory_courses": "Подготовительные курсы",
+  "unknown": "Неизвестный"
 }

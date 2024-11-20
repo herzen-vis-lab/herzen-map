@@ -28,6 +28,27 @@
   "dark mode": "深色主题",
   "light mode": "浅色主题",
   "categories": "类别",
-
-  "learn": "中文"
+  
+  "monument": "纪念碑",
+  "faculty": "学院",
+  "institute": "研究所",
+  "dormitory": "宿舍",
+  "buffet": "自助餐厅",
+  "canteen": "餐厅",
+  "library": "图书馆",
+  "for_foreigners": "给外国人",
+  "architectural_monument": "建筑纪念碑",
+  "landmark": "地标",
+  "historical_building": "历史建筑",
+  "technopark": "科技园",
+  "admissions_office": "招生办公室",
+  "observatory": "天文台",
+  "museum": "博物馆",
+  "entrance": "入口",
+  "boiling_point": "沸点",
+  "sports": "运动",
+  "sdk": "SDK",
+  "hotel": "酒店",
+  "preparatory_courses": "预备课程",
+  "unknown": "未知"
 }
