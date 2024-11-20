@@ -6,6 +6,7 @@ import { NotFound } from "./NotFound";
 import { CustomSnackbar } from "./SnackBar";
 import { Login } from "./Login";
 import { ImagePreviewOnHover } from "./ImagePreviewOnHover";
+import { AdsBanner } from "./AdsBanner";
 
 export  {
     MapWrapper,
@@ -15,5 +16,6 @@ export  {
     NotFound,
     CustomSnackbar,
     Login,
-    ImagePreviewOnHover
+    ImagePreviewOnHover,
+    AdsBanner
 }

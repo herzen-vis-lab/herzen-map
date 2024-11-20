@@ -14,9 +14,7 @@ import { useState, useEffect } from "react";
 import {
   YMaps,
   Map,
-  GeolocationControl,
-  SearchControl,
-  RouteButton,
+  GeolocationControl
 } from "@pbe/react-yandex-maps";
 import { apiKey, location } from "constants/constants";
 import { useDispatch } from "react-redux";
@@ -31,6 +29,7 @@ import "./MapWrapper.css";
 import { useNavigate } from "react-router";
 import { TypesModal } from "./TypesModal";
 import { getPlacemarks } from "./getPlacemarks";
+import { AdsBanner } from "components";
 
 const MapWrapper = () => {
   const navigate = useNavigate();
@@ -143,6 +142,7 @@ const MapWrapper = () => {
         </YMaps>
       </div>
       <TypesModal open={openModal} onClose={handleCloseModal} />
+      <AdsBanner />
     </>
   );
 };
