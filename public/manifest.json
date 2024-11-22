@@ -1,19 +1,19 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Herzen map",
+  "name": "The national Herzen map",
   "icons": [
     {
       "src": "gerb.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "sizes": "16x16 32x32 48x48",
       "type": "image/x-icon"
     },
     {
-      "src": "gerb.ico",
+      "src": "gerb-192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "gerb.ico",
+      "src": "gerb-512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
