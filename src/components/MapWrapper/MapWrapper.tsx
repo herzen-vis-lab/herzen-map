@@ -78,7 +78,7 @@ const MapWrapper = () => {
             <Box sx={{ flexGrow: 1, display: "flex" }}>
               <FormControl sx={{ width: "120px", flexDirection: "row" }}>
                 <Select
-                  value={i18n.language}
+                  value={i18n.language || "ru"}
                   onChange={(e) => {
                     const selectedLang = e.target.value;
                     i18n.changeLanguage(selectedLang);
