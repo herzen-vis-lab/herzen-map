@@ -80,7 +80,9 @@ const MapWrapper = () => {
                 <Select
                   value={i18n.language}
                   onChange={(e) => {
-                    e.target.value = i18n.language;
+                    const selectedLang = e.target.value;
+                    i18n.changeLanguage(selectedLang);
+                    setLang(getYMapLanguage(selectedLang));
                   }}
                   displayEmpty
                   inputProps={{ "aria-label": "Without label" }}
@@ -91,20 +93,20 @@ const MapWrapper = () => {
                   IconComponent={LanguageIcon}
                 >
                   {Array.from(languages.keys()).map((languageCode) => {
-                    const language = languages.get(languageCode);
-                    return (
-                      <MenuItem
-                        key={language}
-                        value={language}
-                        onClick={() => {
-                          i18n.changeLanguage(languageCode);
-                          setLang(getYMapLanguage(language));
-                        }}
-                      >
-                        {language}
-                      </MenuItem>
-                    );
-                  })}
+                      const language = languages.get(languageCode);
+                      return (
+                        <MenuItem
+                          key={languageCode}
+                          value={languageCode}
+                          onClick={() => {
+                            i18n.changeLanguage(languageCode);
+                            setLang(getYMapLanguage(languageCode));
+                          }}
+                        >
+                          {language}
+                        </MenuItem>
+                      );
+                    })}
                 </Select>
               </FormControl>
             </Box>
