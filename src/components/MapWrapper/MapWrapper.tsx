@@ -78,12 +78,7 @@ const MapWrapper = () => {
             <Box sx={{ flexGrow: 1, display: "flex" }}>
               <FormControl sx={{ width: "120px", flexDirection: "row" }}>
                 <Select
-                  value={i18n.language || "ru"}
-                  onChange={(e) => {
-                    const selectedLang = e.target.value;
-                    i18n.changeLanguage(selectedLang);
-                    setLang(getYMapLanguage(selectedLang));
-                  }}
+                  value={i18n.language.slice(0,2)}
                   displayEmpty
                   inputProps={{ "aria-label": "Without label" }}
                   sx={{
@@ -136,7 +131,7 @@ const MapWrapper = () => {
             width="100vw"
             height="100vh"
           >
-            {getPlacemarks(points.data, i18n.language || "ru")}
+            {getPlacemarks(points.data, i18n.language.slice(0,2))}
             <GeolocationControl options={{ float: "left" }} />
           </Map>
         </YMaps>
