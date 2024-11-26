@@ -1,22 +1,25 @@
 FROM node:20
 
-# Optimise for production
+# Оптимизация для production
 ENV NODE_ENV production
 ENV REACT_APP_BACKEND_URI="https://api-map.herzen.spb.ru"
 ENV REACT_APP_ADMIN_USERNAME="RGPU"
 ENV REACT_APP_ADMIN_PASSWORD_HASH="02a9806890e8d703fcc111190e72a6f5674773c93bcce3242cc795e9b8c9f0c5"
 
-# Create app directory
+# Создаем рабочую директорию
 WORKDIR /usr/src/app
 
-# Copy app files
+# Копируем файлы проекта
 COPY --chown=node:node . /usr/src/app
 
-# Install all dependencies
-RUN npm i
+# Устанавливаем зависимости, собираем и чистим лишнее
+RUN npm install && npm install -g serve && npm run build
 
+# Переходим на пользователя node для безопасности
 USER node
 
-# Make port 3000 accessible outside of the container
+# Открываем порт для сервера
 EXPOSE 3000
-CMD ["npm", "start"]
+
+# Запуск статического сервера
+CMD ["serve", "-s", "build"]

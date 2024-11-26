@@ -70,8 +70,6 @@ const MapWrapper = () => {
     dispatch(api.points.getAllPoints());
   }, [dispatch]);
 
-  console.log("NODE_ENV", process.env["NODE_ENV"].toString());
-
   return (
     <>
       <div className="wrapper">
