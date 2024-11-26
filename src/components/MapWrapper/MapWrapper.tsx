@@ -136,7 +136,7 @@ const MapWrapper = () => {
             width="100vw"
             height="100vh"
           >
-            {getPlacemarks(points.data, i18n.language)}
+            {getPlacemarks(points.data, i18n.language || "ru")}
             <GeolocationControl options={{ float: "left" }} />
           </Map>
         </YMaps>
