@@ -7,7 +7,7 @@ interface ImagePreviewOnHoverProps {
   children: React.ReactNode;
 }
 
-const ImagePreviewOnHover = ({ src, width, height, children }: ImagePreviewOnHoverProps ) => {
+const ImagePreviewOnHover = ({ src, width, height, children }: ImagePreviewOnHoverProps) => {
   const [showPreview, setShowPreview] = useState(false);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
 
