@@ -128,8 +128,7 @@ const MapWrapper = () => {
               "coordSystem.geo",
               "util.bounds",
             ]}
-            width="100vw"
-            height="100vh"
+            className="mapc"
           >
             {getPlacemarks(points.data, i18n.language.slice(0,2))}
             <GeolocationControl options={{ float: "left" }} />
