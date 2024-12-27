@@ -8,7 +8,7 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const authToken = localStorage.getItem("authToken");
